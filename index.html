@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recharge Pyramid</title>
+  <link rel="stylesheet" href="index.css">
+  <script defer src="eventHandler.js"></script>
+</head>
+
+<body>
+  <div id="project_container">
+    <div id="projectbox">
+      <!-- Start project HTML -->
+      <div class="battery-container">
+        <div class="battery">
+          <div class='bar' data-power='10'></div>
+          <div class='bar' data-power='20'></div>
+          <div class='bar' data-power='30'></div>
+          <div class='bar' data-power='40'></div>
+          <div class='bar' data-power='50'></div>
+          <div class='bar' data-power='60'></div>
+          <div class='bar' data-power='70'></div>
+          <div class='bar' data-power='80'></div>
+          <div class='bar' data-power='90'></div>
+          <div class='bar' data-power='100'></div>
+        </div>
+      </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+  
+    <div class="music-player">
+      <button hidden id="btnPlayPause">Play</button>
+      <input type="range" id="seekBar" min="0" value="0" step="1">
+    </div>
+  
+    <button id="btn1" class="clickable1 btn">1. Korte Relaxsessie - 12:15 min</button>
+    <button id="btn2" class="clickable2 btn">2. Diepe ontspanning - 26:14 min</button>
+    <button id="btn3" class="clickable3 btn">3. Meer rust in je hoofd - 20:49 min</button>
+    <button id="btn4" class="clickable4 btn">4. Beter slapen - 20:10 min</button>
+    <button id="btn5" class="clickable5 btn">5. Sublimale muzieksessie - 15:00 min</button>
+    <button id="btn6" class="clickable6 btn">6. Recharge sessie - 15:00 min</button>
+    <button id="btn7" class="clickable7 btn">7. Jezelf opladen - 16:31 min</button>
+    <button id="btn8" class="clickable8 btn">8. Loslaten negatieve emoties - 18.42 min</button>
+    <button id="btn9" class="clickable9 btn">9. Emotionele balans - 17.02 min</button>
+    <button id="btn10" class="clickable10 btn">10. Beter eetpatroon - 18:58 min</button>
+    <button id="videoPlayerButton" class="clickable11 btn"></button>
+    <button id="topLeftButton" class="exitbtn">❔</button>
+
+  </div>
+  
+  <div id="videoPlayerPopup" class="video-player-popup">
+    <header>
+      <button onclick="toggleVideoPopup()">X</button>
+    </header>
+    <div class="player-body">
+      <video id="videoPlayer" controls>
+        <source src="../images/MainManRick.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div id="popup" style="display: none;">
+      <p id="popup-message"></p>
+  </div>
+  </div>
+</body>
+
+</html>
