@@ -101,14 +101,16 @@ function toggleVideoPopup() {
     const videoPopup = document.getElementById("videoPlayerPopup");
     videoPopup.style.display = videoPopup.style.display === "block" ? "none" : "block";
 }
-document.addEventListener('DOMContentLoaded', function() {
-    // Display the popup
-    document.getElementById('popup').style.display = 'block';
-    
-    // Set the popup message
-    document.getElementById('popup-message').innerText = 'Hello world';
-});
+
 // Add event listener to the video player button
 document.getElementById("videoPlayerButton").addEventListener('click', toggleVideoPopup);
 
 
+// Function to toggle the blank square popup
+function toggleBlankSquarePopup() {
+    const blankSquarePopup = document.getElementById("blankSquarePopup");
+    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
+}
+
+// Add event listener to the top left button to toggle the blank square popup
+document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
