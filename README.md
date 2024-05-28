@@ -8,6 +8,7 @@ Tickets van Akash:
  * Na vragenlijst reset naar hello world pop up.  (not done)
 
 Tickets van Jasper:
+* linking bottons to database connections. (not done)
 * Proof of concept exporting naar excel.  (not done)
 * Vragenlijst before exporten in excel.  (not done)
 * Vragenlijst after exporten excel.  (not done)
