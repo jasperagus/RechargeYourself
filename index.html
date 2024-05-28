@@ -47,7 +47,18 @@
     <button id="btn9" class="clickable9 btn">9. Emotionele balans - 17.02 min</button>
     <button id="btn10" class="clickable10 btn">10. Beter eetpatroon - 18:58 min</button>
     <button id="videoPlayerButton" class="clickable11 btn"></button>
-    <button id="topLeftButton" class="exitbtn"></button>
+
+
+    <button id="topLeftButton" class="exitbtn">❔</button>
+    <div id="blankSquarePopup">
+      <div class="popupContent">
+        <!-- Add the close button inside the popup content div -->
+        <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
+        <p>Welcome user to "Recharge Yourself"!</p>
+      </div>
+    </div>
+    
+    
 
   </div>
   
@@ -61,10 +72,13 @@
         Your browser does not support the video tag.
       </video>
     </div>
-    <div id="popup" style="display: none;">
-      <p id="popup-message"></p>
   </div>
-  </div>
+
+  <script>
+    window.onload = function() {
+      toggleBlankSquarePopup();
+    };
+  </script>
 </body>
 
 </html>
