@@ -61,6 +61,18 @@ function updateSeekPosition() {
     const audioDuration = oscServer.sound.duration();
     const newPosition = parseInt(seekBar.value) / 100 * audioDuration;
     oscServer.sound.seek(newPosition); // Seek to the new position in the audio file
+
+    // Update the current time text under the seekbar
+    const currentTimeText = document.getElementById("currentTimeText");
+    currentTimeText.textContent = formatTime(currentTime); // Assuming formatTime is a function to format time in hh:mm:ss format
+
+    // Function to format time in hh:mm:ss format
+function formatTime(timeInSeconds) {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${hours}:${minutes}:${seconds}`;
+    }
 }
 // Add event listener to the seekBar input element
 document.getElementById("seekBar").addEventListener("input", updateSeekPosition);
@@ -75,7 +87,6 @@ function toggleBlankSquarePopup(text) {
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
 }
 
-// Update the seek bar and battery periodically
 setInterval(() => {
     const seekBar = document.getElementById("seekBar");
     const audioDuration = oscServer.sound.duration();
@@ -96,19 +107,21 @@ setInterval(() => {
         resetButtonStateAndColor(playingButtonIndex);
     } else if (newPosition === 0 && !isPopupShown) {
         // Show popup only once when seek bar resets to 0%
-        toggleBlankSquarePopup("Song ended!"); // Call the function with the appropriate text
+        toggleBlankSquarePopup("Song ended! How was your experience?"); // Call the function with the appropriate text
+        isPopupShown = true; // Set flag to indicate popup has been shown
 
-        // Set flag to indicate popup has been shown
-        isPopupShown = true;
-        
         // Reset button state and color for the currently playing song
         const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
         resetButtonStateAndColor(playingButtonIndex);
 
-        // Reset the app after the last popup is closed
-        resetApp();
+        // Reset the app after the last popup is closed and show the welcome popup again
+        setTimeout(() => {
+            resetApp();
+            toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!");
+        }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
     }
 }, 1000); // Update every second
+
 
 
 // Function to reset button state and color for the given song index
