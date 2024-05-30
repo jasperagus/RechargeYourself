@@ -8,12 +8,17 @@ function handleButtonClick(songIndex) {
     const isPlaying = button.dataset.isPlaying === "true";
     if (isPlaying) {
         oscServer.pause(true);
+        
+        // Reset button color when the song stops
+        updateButtonColor(songIndex, false);
     } else {
         oscServer.music(songIndex);
         oscServer.pause(false);
+        
+        // Change button color when the song starts playing
+        updateButtonColor(songIndex, true);
     }
     button.dataset.isPlaying = !isPlaying;
-    updateButtonColor(songIndex, !isPlaying);
 }
 
 function updateButtonColor(songIndex, isPlaying) {
@@ -38,6 +43,7 @@ function updateButtonColor(songIndex, isPlaying) {
         button.style.backgroundColor = "#b6b6b6";
         button.innerText = `${songIndex}. ${songNames[songIndex - 1]}`;
     }
+    
 }
 
 // Add event listener to the song buttons
@@ -56,9 +62,18 @@ function updateSeekPosition() {
     const newPosition = parseInt(seekBar.value) / 100 * audioDuration;
     oscServer.sound.seek(newPosition); // Seek to the new position in the audio file
 }
-
 // Add event listener to the seekBar input element
 document.getElementById("seekBar").addEventListener("input", updateSeekPosition);
+
+
+// Define the toggleBlankSquarePopup function separately
+function toggleBlankSquarePopup(text) {
+    const blankSquarePopup = document.getElementById("blankSquarePopup");
+    const popupContent = blankSquarePopup.querySelector(".popupContent");
+    const popupText = popupContent.querySelector("p");
+    popupText.textContent = text; // Set the text content dynamically
+    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
+}
 
 // Update the seek bar and battery periodically
 setInterval(() => {
@@ -75,19 +90,39 @@ setInterval(() => {
         oscServer.pause(true);
         // Show popup when seek bar is full
         showPopup("Seek bar reached 100%!");
+        
+        // Reset button state and color for the currently playing song
+        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
+        resetButtonStateAndColor(playingButtonIndex);
     } else if (newPosition === 0 && !isPopupShown) {
         // Show popup only once when seek bar resets to 0%
-        toggleBlankSquarePopup(" Song ended!");
-        isPopupShown = true; // Set flag to indicate popup has been shown
+        toggleBlankSquarePopup("Song ended!"); // Call the function with the appropriate text
+
+        // Set flag to indicate popup has been shown
+        isPopupShown = true;
+        
+        // Reset button state and color for the currently playing song
+        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
+        resetButtonStateAndColor(playingButtonIndex);
+
+        // Reset the app after the last popup is closed
+        resetApp();
     }
 }, 1000); // Update every second
+
+
+// Function to reset button state and color for the given song index
+function resetButtonStateAndColor(songIndex) {
+    const button = document.getElementById(`btn${songIndex}`);
+    button.dataset.isPlaying = "false";
+    updateButtonColor(songIndex, false);
+}
 
 // Function to show popup
 function showPopup(message) {
     // Replace this with your popup display logic
     alert(message);
 }
-
 
 // Function to update the battery
 function updateBattery(currentTime, audioDuration) {
@@ -104,19 +139,6 @@ function updateBattery(currentTime, audioDuration) {
     });
 }
 
-/*
-// Function to toggle the music player popup
-function togglePopup() {
-    const popup = document.getElementById("musicPlayerPopup");
-    popup.style.display = popup.style.display === "block" ? "none" : "block";
-}
-
-// Function to play a song from the popup
-function playSong(songIndex) {
-    oscServer.music(songIndex);
-    togglePopup(); // Close the popup after selecting a song
-}
-
 // Function to toggle the video player popup
 function toggleVideoPopup() {
     const videoPopup = document.getElementById("videoPlayerPopup");
@@ -125,27 +147,6 @@ function toggleVideoPopup() {
 
 // Add event listener to the video player button
 document.getElementById("videoPlayerButton").addEventListener('click', toggleVideoPopup);
-
-
-
-// Function to toggle the blank square popup with custom text
-function toggleBlankSquarePopup(text = '') {
-    const blankSquarePopup = document.getElementById("blankSquarePopup");
-    const popupContent = blankSquarePopup.querySelector(".popupContent");
-    const popupText = popupContent.querySelector("p");
-    popupText.textContent = text; // Set the text content dynamically
-    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-}
-*/
-
-window.onload = function() {
-    toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!");
-};
-
-
-// Add event listener to the top left button to toggle the blank square popup
-document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
-
 
 // Function to toggle the blank square popup with custom text
 function toggleBlankSquarePopup(text) {
@@ -156,30 +157,16 @@ function toggleBlankSquarePopup(text) {
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
 }
 
-// Function to pause a song and display popup
-function handleButtonClick(songIndex) {
-    const button = document.getElementById(`btn${songIndex}`);
-    const isPlaying = button.dataset.isPlaying === "true";
-    if (isPlaying) {
-        oscServer.pause(true);
-        const songNames = [
-            "Korte Relaxsessie",
-            "Diepe ontspanning",
-            "Meer rust in je hoofd",
-            "Beter slapen",
-            "Sublimale muzieksessie",
-            "Recharge sessie",
-            "Jezelf opladen",
-            "Loslaten negatieve emoties",
-            "Emotionele balans",
-            "Beter eetpatroon"
-        ];
-        const songName = songNames[songIndex - 1];
-      //  toggleBlankSquarePopup(`The song "${songName}" has stopped playing. How do u feel right now?`); // Pass custom text
-    } else {
-        oscServer.music(songIndex);
-        oscServer.pause(false);
-    }
-    button.dataset.isPlaying = !isPlaying;
-    updateButtonColor(songIndex, !isPlaying);
+window.onload = function() {
+    toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!");
+};
+
+// Add event listener to the top left button to toggle the blank square popup
+document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
+
+function resetApp() {
+    // Reset any necessary variables or states
+    isPopupShown = false; // Reset popup flag
+    oscServer.reset(); // Reset the OSC server
+    // Reset any other app-specific states or variables
 }
