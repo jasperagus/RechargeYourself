@@ -61,8 +61,19 @@ function updateSeekPosition() {
     const audioDuration = oscServer.sound.duration();
     const newPosition = parseInt(seekBar.value) / 100 * audioDuration;
     oscServer.sound.seek(newPosition); // Seek to the new position in the audio file
-}
 
+    // Update the current time text under the seekbar
+    const currentTimeText = document.getElementById("currentTimeText");
+    currentTimeText.textContent = formatTime(currentTime); // Assuming formatTime is a function to format time in hh:mm:ss format
+
+    // Function to format time in hh:mm:ss format
+function formatTime(timeInSeconds) {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = Math.floor(timeInSeconds % 60);
+    return `${hours}:${minutes}:${seconds}`;
+    }
+}
 // Add event listener to the seekBar input element
 document.getElementById("seekBar").addEventListener("input", updateSeekPosition);
 
@@ -76,24 +87,14 @@ function toggleBlankSquarePopup(text) {
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
 }
 
-// Add this function to update the timer display
-function updateTimerDisplay(currentTime) {
-    const timerDisplay = document.getElementById("timerDisplay");
-    timerDisplay.textContent = formatTime(currentTime);
-}
-
-// Modify your setInterval function to update the timer display
 setInterval(() => {
     const seekBar = document.getElementById("seekBar");
     const audioDuration = oscServer.sound.duration();
-    const currentTime = oscServer.sound.seek(); // Current playback time
-
+    const currentTime = oscServer.sound.seek();
     const newPosition = (currentTime / audioDuration) * 100; // Calculate percentage progress
     seekBar.value = newPosition; // Update the seek bar value
     updateBattery(currentTime, audioDuration);
     
-    updateTimerDisplay(currentTime); // Update the timer display
-
     // Check if the seek bar reaches 100% or resets to 0%
     if (newPosition === 100) {
         // Pause the music when it reaches the end of the track
@@ -121,16 +122,6 @@ setInterval(() => {
     }
 }, 1000); // Update every second
 
-
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-    return `${padZero(minutes)}:${padZero(remainingSeconds)}`;
-}
-
-function padZero(number) {
-    return (number < 10 ? '0' : '') + number;
-}
 
 
 // Function to reset button state and color for the given song index
@@ -185,11 +176,6 @@ window.onload = function() {
 
 // Add event listener to the top left button to toggle the blank square popup
 document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
-
-
-    
-
-
 
 function resetApp() {
     // Reset any necessary variables or states
