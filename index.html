@@ -50,7 +50,6 @@
     <button id="btn10" class="clickable10 btn">10. Beter eetpatroon - 18:58 min</button>
     <button id="videoPlayerButton" class="clickable11 btn"></button>
 
-
     <button id="topLeftButton" class="exitbtn">❔</button>
     <div id="blankSquarePopup">
       <div class="popupContent">
@@ -58,12 +57,15 @@
         <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
         <p>Welcome to <span style="font-weight: bold;">Recharge Yourself!</span></p>
         <p class="description">Our app offers a selection of 10 soothing audios, each designed to create a calming and relaxing experience. Choose your favorite and let the relaxation begin.</p>
+        <form id="feedbackForm">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br><br>
+          <label for="feedback">Feedback:</label>
+          <textarea id="feedback" name="feedback" required></textarea><br><br>
+          <button type="button" onclick="submitForm()">Submit</button>
+        </form>
       </div>
     </div>
-    
-    
-
-    
   </div>
   
   <div id="videoPlayerPopup" class="video-player-popup">
