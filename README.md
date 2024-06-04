@@ -16,25 +16,6 @@ Tickets van Jasper:
 
 
 Vragenlijst:
-
-startvragen:
-Hoe voel je je?
-1. Gestrest
-2. Futloos
-3. Somber
-4. Energiek
-5. Neutraal
-
-Neem je een pauze van je werk?
-1. Ja
-2. Nee
-
-Heb je vandaag gezond gegeten?
-1. Ja
-2. Nee
-
-Afsluitende vragen:
-
 Hoe voelde je je voorafgaande aan deze sessie?
 1. Gestrest
 2. Futloos
@@ -48,6 +29,10 @@ Afhankelijk van de keuze uit vraag 1 is het nu erger/slechter/minder of beter
 3. hetzelfde
 4. beter 
 5. Veel beter
+
+Neem je een pauze van je werk?
+1. Ja
+2. Nee
 
 Ga je gezond eten vandaag?
 1. Ja
