@@ -248,28 +248,6 @@ body {
   background-color: #ad9bb5;
 }
 
-#topLeftButton {
-  position: fixed;
-  top: 20px;
-  right: 20px; /* Adjust the distance from the right edge */
-  background-color: #b6b6b6;
-  border: none;
-  color: white;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  border-radius: 50%; /* Make it a perfect circle */
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000; /* Ensure the button appears above other elements */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#topLeftButton:hover {
-  background-color: #ad9bb5;
-}
-
 #videoPlayerButton::before {
   content: "📽️"; /* Display the emoji */
   font-size: 50px; /* Adjust the font size to make it slightly bigger */
