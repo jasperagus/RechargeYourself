@@ -7,10 +7,10 @@ Tickets van Akash:
  * Na nummer after vragenlijst.  (Done)
  * Na vragenlijst reset naar hello world pop up.  (Done)
 
- * 1ste pop-up: Welcome to the recharge Cocoon
- * New: click top right video
- * Been before? click X and choose your session. 
- 
+ * 1ste pop-up: Welcome to the recharge Cocoon (Done)
+ * New: click top right video (Done)
+ * Been before? click X and choose your session. (Done)
+
  * Recharge yourself vervangen door "Charging"
  * Logo links boven vervangen met button(zie website)
  * battery naar links
