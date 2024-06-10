@@ -379,3 +379,62 @@ body {
 .toggleBlankSquarePopup button {
   margin-top: 10px;
 }
+
+
+.popupContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 80%; /* Adjust the width of the content */
+  height: auto; /* Let the height adjust based on content */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.welcomeMessage {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Add space between welcome message and questions */
+}
+
+.questionsContainer {
+  text-align: left; /* Align questions to the left */
+}
+
+.submitButton {
+  background-color: #ff0000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Hover effect for the submit button */
+.submitButton:hover {
+  background-color: #45a049; /* Darker Green */
+  color: white;
+}
+
