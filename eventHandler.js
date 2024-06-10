@@ -43,7 +43,6 @@ function updateButtonColor(songIndex, isPlaying) {
         button.style.backgroundColor = "#b6b6b6";
         button.innerText = `${songIndex}. ${songNames[songIndex - 1]}`;
     }
-    
 }
 
 // Add event listener to the song buttons
@@ -66,17 +65,7 @@ function updateSeekPosition() {
 // Add event listener to the seekBar input element
 document.getElementById("seekBar").addEventListener("input", updateSeekPosition);
 
-
-// Define the toggleBlankSquarePopup function separately
-function toggleBlankSquarePopup(text) {
-    const blankSquarePopup = document.getElementById("blankSquarePopup");
-    const popupContent = blankSquarePopup.querySelector(".popupContent");
-    const popupText = popupContent.querySelector("p");
-    popupText.textContent = text; // Set the text content dynamically
-    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-}
-
-// Add this function to update the timer display
+// Function to update the timer display
 function updateTimerDisplay(currentTime) {
     const timerDisplay = document.getElementById("timerDisplay");
     timerDisplay.textContent = formatTime(currentTime);
@@ -106,7 +95,7 @@ setInterval(() => {
         resetButtonStateAndColor(playingButtonIndex);
     } else if (newPosition === 0 && !isPopupShown) {
         // Show popup only once when seek bar resets to 0%
-        toggleBlankSquarePopup("Song ended! How was your experience?"); // Call the function with the appropriate text
+        toggleBlankSquarePopup("Song ended! How was your experience?", true); // Call the function with the appropriate text and true to show questions
         isPopupShown = true; // Set flag to indicate popup has been shown
 
         // Reset button state and color for the currently playing song
@@ -116,11 +105,10 @@ setInterval(() => {
         // Reset the app after the last popup is closed and show the welcome popup again
         setTimeout(() => {
             resetApp();
-            toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!");
+            toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!", false); // Don't show questions on welcome popup
         }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
     }
 }, 1000); // Update every second
-
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -131,7 +119,6 @@ function formatTime(seconds) {
 function padZero(number) {
     return (number < 10 ? '0' : '') + number;
 }
-
 
 // Function to reset button state and color for the given song index
 function resetButtonStateAndColor(songIndex) {
@@ -170,17 +157,8 @@ function toggleVideoPopup() {
 // Add event listener to the video player button
 document.getElementById("videoPlayerButton").addEventListener('click', toggleVideoPopup);
 
-// Function to toggle the blank square popup with custom text
-function toggleBlankSquarePopup(text) {
-    const blankSquarePopup = document.getElementById("blankSquarePopup");
-    const popupContent = blankSquarePopup.querySelector(".popupContent");
-    const popupText = popupContent.querySelector("p");
-    popupText.textContent = text; // Set the text content dynamically
-    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-}
-
 window.onload = function() {
-    toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!");
+    toggleBlankSquarePopup("Welcome user to 'Recharge Yourself'!", false); // Don't show questions on welcome popup
 };
 
 // Add event listener to the top left button to toggle the blank square popup
@@ -191,4 +169,16 @@ function resetApp() {
     isPopupShown = false; // Reset popup flag
     oscServer.reset(); // Reset the OSC server
     // Reset any other app-specific states or variables
+}
+
+function toggleBlankSquarePopup(text, showQuestions) {
+    const blankSquarePopup = document.getElementById("blankSquarePopup");
+    const popupContent = blankSquarePopup.querySelector(".popupContent");
+    const popupText = popupContent.querySelector("p");
+    const submitButton = popupContent.querySelector(".submitButton");
+    const questionsContainer = popupContent.querySelector(".questionsContainer");
+    popupText.textContent = text; // Set the text content dynamically
+    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
+    questionsContainer.style.display = showQuestions ? "block" : "none";
+    submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
 }
