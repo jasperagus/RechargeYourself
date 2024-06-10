@@ -31,7 +31,8 @@ app.on('activate', () => {
 });
 
 ipcMain.handle('save-dialog', async (event, data) => {
-  const filePath = path.join(app.getPath('home'), 'OneDrive', 'Qub3zGamingL4', 'data.csv');
+  const username = os.userInfo().username;
+  const filePath = path.join('/Users', username, 'OneDrive', 'Qub3zGamingL4', 'data.csv');
   try {
     fs.appendFileSync(filePath, data, 'utf-8');
     console.log('File saved to:', filePath);

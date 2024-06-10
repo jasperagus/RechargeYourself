@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "electron .",
-        "package": "electron-packager . rechargeYourself --platform=win32 --arch=x64 --out=C:/Users/Qub3zGamingL3/source/repos/rechargepyramid/app-3.2.0/resources/app/tests"
+        "package": "electron-packager . rechargeYourself --platform=win32 --arch=x64 --out=C:/Users/Qub3zGamingL3/source/repos/RechargeYourself/app-3.2.0/resources/app/Tests"
     }
 
 }
