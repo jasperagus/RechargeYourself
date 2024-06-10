@@ -186,11 +186,6 @@ window.onload = function() {
 // Add event listener to the top left button to toggle the blank square popup
 document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
 
-
-    
-
-
-
 function resetApp() {
     // Reset any necessary variables or states
     isPopupShown = false; // Reset popup flag
