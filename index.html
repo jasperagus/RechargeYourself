@@ -146,30 +146,31 @@
       csvContent.push(value);
     });
   });
-  csvContent.push(''); // Add a blank line between form submissions
+  csvContent.push('\n'); 
 
   // Join with newline characters for proper CSV format
   const csvData = csvContent.join('\n');
 
-  // Generate a unique filename based on current timestamp
-  const timestamp = new Date().toISOString().replace(/[:\-]/g, ''); // Remove special characters from timestamp
-  const filename = `survey_results_${timestamp}.csv`;
+  // Require Electron's remote module
+  const { remote } = require('electron');
+  const fs = remote.require('fs');
+  const path = require('path');
 
-  // Create a Blob with the CSV data
-  const blob = new Blob([csvData], { type: 'text/csv' });
+  // Determine the file path for saving
+  const filePath = path.join(remote.app.getPath('documents'), 'survey_results.csv');
 
-  // Create a link element to trigger download
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.target = '_blank';
-  link.setAttribute('download', filename); // Set the filename
-  document.body.appendChild(link); // Append the link to the document body
-  link.click(); // Simulate a click on the link to trigger the download
+  // Append the CSV data to the file
+  fs.appendFile(filePath, csvData + '\n', (err) => {
+    if (err) {
+      console.error('Error appending to file:', err);
+      return;
+    }
+    console.log('Data successfully appended to file:', filePath);
+  });
 
   // Reset the form
   form.reset();
 }
-
 
 
     window.onload = function() {
