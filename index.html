@@ -100,7 +100,7 @@
             <label for="healthyNo">2. Nee</label><br>
           </form>
         </div>
-        <button class="submitButton" onclick="submitForm()">Submit</button>
+        <button class="submitButton" onclick="submitForm(); toggleBlankSquarePopup()">Submit</button>
       </div>
     </div>
   </div>
@@ -138,32 +138,33 @@
   formData.forEach((value) => {
     valuesRow.push(value);
   });
+
+  // Add date and time to the values row
+  const timestamp = Date.now();
+  const time = new Date(); // Corrected from Datetime() to Date()
+
+  // Format the date and time
+  const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+  const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+
+  // Add formatted date and time to the values row
+  valuesRow.push(formattedDate, formattedTime);
+
   csvContent.push(valuesRow.join(','));
 
   // Join with newline characters for proper CSV format
   const csvData = csvContent.join('\n');
 
   // Initialize Dropbox SDK with your access token
-  const dbx = new Dropbox.Dropbox({ accessToken: 'sl.B2_XAGxM4T3TcZeAX7AVv4xqZj6-sOjx4OKuC9EjCjVg9yQtdL0xZnj3hzndijmiwH0nC5f-4oYcyq-MbuzYKKQ9BWEpDOh4jtVQpfHq5MzR8yhwgYyWgw9CTvkMJHHMpQ9SKESWALDZIfZnfAwGmMM' }); 
+  const dbx = new Dropbox.Dropbox({ accessToken: '' });
 
-// Generate a unique filename (e.g., timestamp)
-const timestamp = Date.now();
-const time = new Date(); // Corrected from Datetime() to Date()
-
-// Format the date and time
-const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
-
-const fileName = `survey_results_Date${formattedDate}_Time${formattedTime}.csv`;
-const filePath = `/RechargeYourself/${fileName}`;
-
+  const fileName = `survey_results_Date${formattedDate}_Time${formattedTime}.csv`;
+  const filePath = `/RechargeYourself/${fileName}`;
 
   // Upload the CSV data to Dropbox
   dbx.filesUpload({ path: filePath, contents: csvData })
     .then(response => {
       console.log('File uploaded to Dropbox:', response);
-       // Reset the form
-  form.reset();
     })
     .catch(error => {
       // Display the error message on the screen
@@ -172,7 +173,16 @@ const filePath = `/RechargeYourself/${fileName}`;
       errorMessage.textContent = 'Error uploading file to Dropbox: ' + JSON.stringify(error);
       errorContainer.style.display = 'block';
     });
+
+  // Reset the form
+  form.reset();
 }
+
+
+
+
+
+
     window.onload = function() {
       toggleBlankSquarePopup();
     };
