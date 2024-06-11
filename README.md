@@ -15,7 +15,7 @@ Tickets van Akash:
  * Logo links boven vervangen met button(zie website) (Done)
  * battery naar links (Done)
  * Popup fixen(in progress)
-
+ 
 Tickets van Jasper:
 * Proof of concept exporting naar excel.  (Done)
 * Vragenlijst after exporten excel.  (Done)

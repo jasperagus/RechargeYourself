@@ -105,7 +105,7 @@ setInterval(() => {
         // Reset the app after the last popup is closed and show the welcome popup again
         setTimeout(() => {
             resetApp();
-            toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session.", false); // Don't show questions on welcome popup
+            toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'!", false); // Don't show questions on welcome popup
         }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
     }
 }, 1000); // Update every second
@@ -158,7 +158,7 @@ function toggleVideoPopup() {
 document.getElementById("videoPlayerButton").addEventListener('click', toggleVideoPopup);
 
 window.onload = function() {
-    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false); // Don't show questions on welcome popup
+    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'!" , false); // Don't show questions on welcome popup
 };
 
 // Add event listener to the top left button to toggle the blank square popup
@@ -175,9 +175,15 @@ function toggleBlankSquarePopup(text, showQuestions) {
     const blankSquarePopup = document.getElementById("blankSquarePopup");
     const popupContent = blankSquarePopup.querySelector(".popupContent");
     const popupText = popupContent.querySelector("p");
+    const welcomeMessage = popupContent.querySelector("#welcomeMessage"); // Select welcome message
     const submitButton = popupContent.querySelector(".submitButton");
     const questionsContainer = popupContent.querySelector(".questionsContainer");
+    
     popupText.textContent = text; // Set the text content dynamically
+    
+    // Show or hide welcome message based on text presence
+    welcomeMessage.style.display = text ? "block" : "none";
+    
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button

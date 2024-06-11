@@ -56,9 +56,12 @@
     
     <div id="blankSquarePopup" style="display: none;">
       <div class="popupContent">
+        <div class="popupBackground"></div> <!-- Background image -->
         <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
-        <div class="welcomeMessage">
+        <div class="welcomeMessage" id="welcomeMessage">
           <p>Welcome to <span style="font-weight: bold;">Recharge Yourself!</span></p>
+          <p>New, click the top right video.</p>
+          <p>Been before, click X and choose your session.</p>
         </div>
         <div class="questionsContainer">
 
@@ -123,18 +126,6 @@
       </video>
     </div>
   </div>
-
-  <script>
-    function toggleBlankSquarePopup(text, showQuestions) {
-        const blankSquarePopup = document.getElementById("blankSquarePopup");
-        const popupContent = blankSquarePopup.querySelector(".popupContent");
-        const popupText = popupContent.querySelector("p");
-        const questionsContainer = popupContent.querySelector(".questionsContainer");
-        popupText.textContent = text; // Set the text content dynamically
-        blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-        questionsContainer.style.display = showQuestions ? "block" : "none";
-    }
-</script>
 
 
   <script>
