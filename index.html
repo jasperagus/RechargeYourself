@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>Recharge Pyramid</title>
   <link rel="stylesheet" href="index.css">
   <script defer src="eventHandler.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="renderer.js"></script>
+  <script defer src="preload.js"></script>
 </head>
-
 <body>
   <div id="project_container">
     <div id="projectbox">
@@ -27,17 +28,16 @@
         </div>
       </div>
     </div>
-  
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
-  
+
     <div class="music-player">
       <button hidden id="btnPlayPause">Play</button>
       <input type="range" id="seekBar" min="0" value="0" step="1">
       <div id="timerDisplay">00:00</div>
-
     </div>
-  
+
     <button id="btn1" class="clickable1 btn">1. Korte Relaxsessie - 12:15 min</button>
     <button id="btn2" class="clickable2 btn">2. Diepe ontspanning - 26:14 min</button>
     <button id="btn3" class="clickable3 btn">3. Meer rust in je hoofd - 20:49 min</button>
@@ -50,8 +50,6 @@
     <button id="btn10" class="clickable10 btn">10. Beter eetpatroon - 18:58 min</button>
     <button id="videoPlayerButton" class="clickable11 btn"></button>
 
-
-    
     <div id="blankSquarePopup" style="display: none;">
       <div class="popupContent">
         <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
@@ -59,9 +57,8 @@
           <p>Welcome to <span style="font-weight: bold;">Recharge Yourself!</span></p>
         </div>
         <div class="questionsContainer">
-
           <h4>Hoe voelde je je voorafgaande aan deze sessie?</h4>
-          <form>
+          <form id="rechargeForm">
             <input type="checkbox" id="feeling1" name="feeling" value="Gestrest">
             <label for="feeling1">1. Gestrest</label><br>
             <input type="checkbox" id="feeling2" name="feeling" value="Futloos">
@@ -71,11 +68,9 @@
             <input type="checkbox" id="feeling4" name="feeling" value="Energiek">
             <label for="feeling4">4. Energiek</label><br>
             <input type="checkbox" id="feeling5" name="feeling" value="Neutraal">
-            <label for="feeling5">5. Neutraal</label>
-          </form>
-    
-          <h4>Afhankelijk van de keuze uit vraag 1 is het nu erger/slechter/minder of beter?</h4>
-          <form>
+            <label for="feeling5">5. Neutraal</label><br>
+
+            <h4>Afhankelijk van de keuze uit vraag 1 is het nu erger/slechter/minder of beter?</h4>
             <input type="checkbox" id="impact1" name="impact" value="Erger">
             <label for="impact1">1. Erger</label><br>
             <input type="checkbox" id="impact2" name="impact" value="Slechter">
@@ -85,30 +80,25 @@
             <input type="checkbox" id="impact4" name="impact" value="Beter">
             <label for="impact4">4. Beter</label><br>
             <input type="checkbox" id="impact5" name="impact" value="Veel beter">
-            <label for="impact5">5. Veel beter</label>
-          </form>
-    
-          <h4>Neem je een pauze van je werk?</h4>
-          <form>
+            <label for="impact5">5. Veel beter</label><br>
+
+            <h4>Neem je een pauze van je werk?</h4>
             <input type="checkbox" id="pauseYes" name="pause" value="Ja">
             <label for="pauseYes">1. Ja</label><br>
             <input type="checkbox" id="pauseNo" name="pause" value="Nee">
             <label for="pauseNo">2. Nee</label><br>
-          </form>
-    
-          <h4>Heb je vandaag gezond gegeten?</h4>
-          <form>
+
+            <h4>Heb je vandaag gezond gegeten?</h4>
             <input type="checkbox" id="healthyYes" name="healthy" value="Ja">
             <label for="healthyYes">1. Ja</label><br>
             <input type="checkbox" id="healthyNo" name="healthy" value="Nee">
             <label for="healthyNo">2. Nee</label><br>
           </form>
         </div>
-        <input type="submit" class="submitButton" value="Submit">
+        <button class="submitButton" onclick="submitForm()">Submit</button>
       </div>
     </div>
   </div>
-  
 
   <div id="videoPlayerPopup" class="video-player-popup">
     <header>
@@ -124,23 +114,67 @@
 
   <script>
     function toggleBlankSquarePopup(text, showQuestions) {
-        const blankSquarePopup = document.getElementById("blankSquarePopup");
-        const popupContent = blankSquarePopup.querySelector(".popupContent");
-        const popupText = popupContent.querySelector("p");
-        const questionsContainer = popupContent.querySelector(".questionsContainer");
-        popupText.textContent = text; // Set the text content dynamically
-        blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-        questionsContainer.style.display = showQuestions ? "block" : "none";
+      const blankSquarePopup = document.getElementById("blankSquarePopup");
+      const popupContent = blankSquarePopup.querySelector(".popupContent");
+      const popupText = popupContent.querySelector("p");
+      const questionsContainer = popupContent.querySelector(".questionsContainer");
+      popupText.textContent = text; // Set the text content dynamically
+      blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
+      questionsContainer.style.display = showQuestions ? "block" : "none";
     }
-</script>
+
+    function submitForm() {
+  const form = document.getElementById('rechargeForm');
+  const formData = new FormData(form);
+  const csvContent = [];
+
+  // Transpose the form data to save vertically
+  const formDataArray = Array.from(formData.entries());
+  const transposedFormData = formDataArray.reduce((acc, [name, value]) => {
+    if (!acc[name]) {
+      acc[name] = [value];
+    } else {
+      acc[name].push(value);
+    }
+    return acc;
+  }, {});
+
+  // Iterate through each form field and value
+  Object.entries(transposedFormData).forEach(([name, values]) => {
+    csvContent.push(`${name}:`);
+    values.forEach(value => {
+      csvContent.push(value);
+    });
+  });
+  csvContent.push(''); // Add a blank line between form submissions
+
+  // Join with newline characters for proper CSV format
+  const csvData = csvContent.join('\n');
+
+  // Generate a unique filename based on current timestamp
+  const timestamp = new Date().toISOString().replace(/[:\-]/g, ''); // Remove special characters from timestamp
+  const filename = `survey_results_${timestamp}.csv`;
+
+  // Create a Blob with the CSV data
+  const blob = new Blob([csvData], { type: 'text/csv' });
+
+  // Create a link element to trigger download
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.target = '_blank';
+  link.setAttribute('download', filename); // Set the filename
+  document.body.appendChild(link); // Append the link to the document body
+  link.click(); // Simulate a click on the link to trigger the download
+
+  // Reset the form
+  form.reset();
+}
 
 
-  <script>
+
     window.onload = function() {
       toggleBlankSquarePopup();
     };
   </script>
-
-
 </body>
 </html>
