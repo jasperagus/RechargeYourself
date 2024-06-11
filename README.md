@@ -11,9 +11,9 @@ Tickets van Akash:
  * New: click top right video (Done)
  * Been before? click X and choose your session. (Done)
 
- * Recharge yourself vervangen door "Charging"
- * Logo links boven vervangen met button(zie website)
- * battery naar links
+ * Recharge yourself vervangen door "Charging" (Done)
+ * Logo links boven vervangen met button(zie website) (Done)
+ * battery naar links (In progress)
 
 Tickets van Jasper:
 * Proof of concept exporting naar excel.  (Done)

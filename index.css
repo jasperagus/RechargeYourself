@@ -214,17 +214,6 @@ body {
   border-radius: 10px;
 }
 
-
-/* Battery container */
-.battery-container {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 20%; /* Adjust top position as needed */
-  width: 100%;
-  top: 12%; /* Adjust top position as needed */
-}
-
 /* Updated button styling for the video player button */
 #videoPlayerButton {
   position: fixed;
@@ -272,6 +261,16 @@ body {
   margin: 0;
 }
 
+.battery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10%; /* Adjust top position as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Ensures the container takes up the full width of the screen */
+}
 
 /* Battery styles */
 .battery {
@@ -416,3 +415,40 @@ body {
   color: white;
 }
 
+#project_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+#logo {
+  margin-bottom: 20px; /* Add some space below the logo */
+}
+
+#logo img {
+  width: 150px; /* Adjust the size as needed */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+.music-player {
+  display: flex;
+  align-items: center;
+  width: 10cm;
+  margin: 20px;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#timerDisplay {
+  margin-left: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+#seekBar {
+  flex-grow: 1;
+  margin: 0 5px; /* Adjusted margin for seek bar */
+}
