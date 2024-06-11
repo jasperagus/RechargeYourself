@@ -73,7 +73,7 @@
             <input type="checkbox" id="feeling4" name="feeling" value="Energiek">
             <label for="feeling4">4. Energiek</label><br>
             <input type="checkbox" id="feeling5" name="feeling" value="Neutraal">
-            <label for="feeling5">5. Neutraal</label><br>
+                        <label for="feeling5">5. Neutraal</label><br>
 
             <h4>Afhankelijk van de keuze uit vraag 1 is het nu erger/slechter/minder of beter?</h4>
             <input type="checkbox" id="impact1" name="impact" value="Erger">
@@ -129,59 +129,54 @@
     }
 
     function submitForm() {
-  const form = document.getElementById('rechargeForm');
-  const formData = new FormData(form);
-  const csvContent = [];
+      const form = document.getElementById('rechargeForm');
+      const formData = new FormData(form);
+      const csvContent = [];
 
-  // Push all values into the second row
-  const valuesRow = [];
-  formData.forEach((value) => {
-    valuesRow.push(value);
-  });
+      // Push all values into the second row
+      const valuesRow = [];
+      formData.forEach((value) => {
+        valuesRow.push(value);
+      });
 
-  // Add date and time to the values row
-  const timestamp = Date.now();
-  const time = new Date(); // Corrected from Datetime() to Date()
+      // Add date and time to the values row
+      const timestamp = Date.now();
+      const time = new Date(); // Corrected from Datetime() to Date()
 
-  // Format the date and time
-  const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-  const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+      // Format the date and time
+      const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+      const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
 
-  // Add formatted date and time to the values row
-  valuesRow.push(formattedDate, formattedTime);
+      // Add formatted date and time to the values row
+      valuesRow.push(formattedDate, formattedTime);
 
-  csvContent.push(valuesRow.join(','));
+      csvContent.push(valuesRow.join(','));
 
-  // Join with newline characters for proper CSV format
-  const csvData = csvContent.join('\n');
+      // Join with newline characters for proper CSV format
+      const csvData = csvContent.join('\n');
 
-  // Initialize Dropbox SDK with your access token
-  const dbx = new Dropbox.Dropbox({ accessToken: '' });
+      // Initialize Dropbox SDK with your access token
+      const dbx = new Dropbox.Dropbox({ accessToken: '' });
 
-  const fileName = `survey_results_Date${formattedDate}_Time${formattedTime}.csv`;
-  const filePath = `/RechargeYourself/${fileName}`;
+      const fileName = `survey_results_Date${formattedDate}_Time${formattedTime}.csv`;
+      const filePath = `/RechargeYourself/${fileName}`;
 
-  // Upload the CSV data to Dropbox
-  dbx.filesUpload({ path: filePath, contents: csvData })
-    .then(response => {
-      console.log('File uploaded to Dropbox:', response);
-    })
-    .catch(error => {
-      // Display the error message on the screen
-      const errorContainer = document.getElementById('errorContainer');
-      const errorMessage = document.getElementById('errorMessage');
-      errorMessage.textContent = 'Error uploading file to Dropbox: ' + JSON.stringify(error);
-      errorContainer.style.display = 'block';
-    });
+      // Upload the CSV data to Dropbox
+      dbx.filesUpload({ path: filePath, contents: csvData })
+        .then(response => {
+          console.log('File uploaded to Dropbox:', response);
+        })
+        .catch(error => {
+          // Display the error message on the screen
+          const errorContainer = document.getElementById('errorContainer');
+          const errorMessage = document.getElementById('errorMessage');
+          errorMessage.textContent = 'Error uploading file to Dropbox: ' + JSON.stringify(error);
+          errorContainer.style.display = 'block';
+        });
 
-  // Reset the form
-  form.reset();
-}
-
-
-
-
-
+      // Reset the form
+      form.reset();
+    }
 
     window.onload = function() {
       toggleBlankSquarePopup();

@@ -1,6 +1,4 @@
-var sendOSC = require('./osc.js');
-
-let isPopupShown = false; 
+var sendOSC = require('./osc.js'); 
 var oscServer = new sendOSC();
 
 function handleButtonClick(songIndex) {
@@ -72,43 +70,53 @@ function updateTimerDisplay(currentTime) {
 }
 
 // Modify your setInterval function to update the timer display
-setInterval(() => {
+// Function to update the seek bar
+function updateSeekBar() {
     const seekBar = document.getElementById("seekBar");
     const audioDuration = oscServer.sound.duration();
     const currentTime = oscServer.sound.seek(); // Current playback time
 
     const newPosition = (currentTime / audioDuration) * 100; // Calculate percentage progress
     seekBar.value = newPosition; // Update the seek bar value
-    updateBattery(currentTime, audioDuration);
-    
-    updateTimerDisplay(currentTime); // Update the timer display
+}
 
-    // Check if the seek bar reaches 100% or resets to 0%
-    if (newPosition === 100) {
-        // Pause the music when it reaches the end of the track
-        oscServer.pause(true);
-        // Show popup when seek bar is full
-        showPopup("Seek bar reached 100%!");
-        
-        // Reset button state and color for the currently playing song
-        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
-        resetButtonStateAndColor(playingButtonIndex);
-    } else if (newPosition === 0 && !isPopupShown) {
-        // Show popup only once when seek bar resets to 0%
-        toggleBlankSquarePopup("Song ended! How was your experience?", true); // Call the function with the appropriate text and true to show questions
-        isPopupShown = true; // Set flag to indicate popup has been shown
+// Function to update the timer display
+function updateTimerDisplay() {
+    const currentTime = oscServer.sound.seek(); // Current playback time
+    const minutes = Math.floor(currentTime / 60);
+    const seconds = Math.floor(currentTime % 60);
+    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById("timerDisplay").textContent = formattedTime; // Update the timer display
+}
 
-        // Reset button state and color for the currently playing song
-        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
-        resetButtonStateAndColor(playingButtonIndex);
 
-        // Reset the app after the last popup is closed and show the welcome popup again
-        setTimeout(() => {
-            resetApp();
-            toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session.", false); // Don't show questions on welcome popup
-        }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
+// Function to handle end of track and show popup
+// Function to handle end of track and show popup
+function handleEndOfTrack() {
+    const currentTime = oscServer.sound.seek(); // Get current playback time
+    const audioDuration = oscServer.sound.duration(); // Get total duration of the audio file
+
+    if (currentTime >= audioDuration) {
+        showPopup("Timer is done!");
     }
-}, 1000); // Update every second
+}
+
+// Function to submit the form and hide the popup
+function submitFormAndHidePopup() {
+    seekBar.value = 0; // Reset the seek bar position to zero
+    submitForm(); // Submit the form (as defined in your existing code)
+    isPopupShown = false; // Reset the flag to allow showing the popup again
+}
+
+// Add event listener to the submit button in the popup
+document.querySelector('.submitButton').addEventListener('click', submitFormAndHidePopup);
+
+// Update every second
+setInterval(() => {
+    updateSeekBar();
+    updateTimerDisplay();
+    handleEndOfTrack();
+}, 10); // Update every second
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
