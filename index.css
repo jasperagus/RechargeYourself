@@ -41,61 +41,62 @@ body {
   height: 20%;
 }
 
+/* Adjusted top position for the first button */
 .clickable1 {
-  top: 43%;
+  top: 35%;
   left: 15%;
   width: 630px;
 }
 
+/* Reduced space between buttons */
 .clickable2 {
-  top: 49.5%;
+  top: 42%;
   left: 15%;
   width: 630px;
 }
 
 .clickable3 {
-  top: 56%;
+  top: 49%;
   left: 15%;
   width: 630px;
 }
 
 .clickable4 {
-  top: 62.5%;
+  top: 56%;
   left: 15%;
   width: 630px;
 }
 
 .clickable5 {
-  top: 69%;
+  top: 63%;
   left: 15%;
   width: 630px;
 }
 
 .clickable6 {
-  top: 43%;
+  top: 35%;
   left: 48.5%;
 }
 
 .clickable7 {
-  top: 49.5%;
+  top: 42%;
   left: 48.5%;
 }
 
 .clickable8 {
-  top: 56%;
+  top: 49%;
   left: 48.5%;
 }
 
 .clickable9 {
-  top: 62.5%;
+  top: 56%;
   left: 48.5%;
 }
 
 .clickable10 {
-  top: 69%;
+  top: 63%;
   left: 48.5%;
 }
-
 
 .music-player {
   position: absolute;
@@ -440,6 +441,7 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
 }
 
 #timerDisplay {
