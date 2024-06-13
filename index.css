@@ -326,6 +326,8 @@ body {
   display: flex; /* Use flexbox */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  font-size: 20px;
+
 }
 
 .closeButton {
@@ -499,7 +501,13 @@ body {
   border-radius: 5px; /* Match the border-radius of the main container */
 }
 
-
+.welcomeMessage {
+  margin-top: -20px; /* Move it 20px higher */
+  margin-bottom: 20px;
+  font-size: 19px;
+  color: #333; /* Modify color as needed */
+  text-align: center; /* Center text within its own container */
+}
 
 
 .closeButton {
@@ -512,9 +520,5 @@ body {
   cursor: pointer;
 }
 
-.welcomeMessage {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #333; /* Modify color as needed */
-}
+
+
