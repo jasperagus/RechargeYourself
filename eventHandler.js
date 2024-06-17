@@ -39,6 +39,7 @@ function updateButtonColor(songIndex, isPlaying) {
     if (isPlaying) {
         button.style.backgroundColor = "#ad9bb5";
         button.innerText = `${songIndex}. ${songNames[songIndex - 1]} - Playing`;
+
     } else {
         button.style.backgroundColor = "#b6b6b6";
         button.innerText = `${songIndex}. ${songNames[songIndex - 1]}`;

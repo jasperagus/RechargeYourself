@@ -38,17 +38,17 @@
       <div id="timerDisplay">00:00</div>
     </div>
 
-    <button id="btn1" class="clickable1 btn">1. Korte Relaxsessie - 12:15 min</button>
-    <button id="btn2" class="clickable2 btn">2. Diepe ontspanning - 26:14 min</button>
-    <button id="btn3" class="clickable3 btn">3. Meer rust in je hoofd - 20:49 min</button>
-    <button id="btn4" class="clickable4 btn">4. Beter slapen - 20:10 min</button>
-    <button id="btn5" class="clickable5 btn">5. Sublimale muzieksessie - 15:00 min</button>
-    <button id="btn6" class="clickable6 btn">6. Recharge sessie - 15:00 min</button>
-    <button id="btn7" class="clickable7 btn">7. Jezelf opladen - 16:31 min</button>
-    <button id="btn8" class="clickable8 btn">8. Loslaten negatieve emoties - 18.42 min</button>
-    <button id="btn9" class="clickable9 btn">9. Emotionele balans - 17.02 min</button>
-    <button id="btn10" class="clickable10 btn">10. Beter eetpatroon - 18:58 min</button>
-    <button id="videoPlayerButton" class="clickable11 btn"></button>
+    <button id="btn1" class="clickable1 btn" onclick="storeButtonClick(this.id)">1. Korte Relaxsessie - 12:15 min</button>
+    <button id="btn2" class="clickable2 btn" onclick="storeButtonClick(this.id)">2. Diepe ontspanning - 26:14 min</button>
+    <button id="btn3" class="clickable3 btn" onclick="storeButtonClick(this.id)">3. Meer rust in je hoofd - 20:49 min</button>
+    <button id="btn4" class="clickable4 btn" onclick="storeButtonClick(this.id)">4. Beter slapen - 20:10 min</button>
+    <button id="btn5" class="clickable5 btn" onclick="storeButtonClick(this.id)">5. Sublimale muzieksessie - 15:00 min</button>
+    <button id="btn6" class="clickable6 btn" onclick="storeButtonClick(this.id)">6. Recharge sessie - 15:00 min</button>
+    <button id="btn7" class="clickable7 btn" onclick="storeButtonClick(this.id)">7. Jezelf opladen - 16:31 min</button>
+    <button id="btn8" class="clickable8 btn" onclick="storeButtonClick(this.id)">8. Loslaten negatieve emoties - 18.42 min</button>
+    <button id="btn9" class="clickable9 btn" onclick="storeButtonClick(this.id)">9. Emotionele balans - 17.02 min</button>
+    <button id="btn10" class="clickable10 btn" onclick="storeButtonClick(this.id)">10. Beter eetpatroon - 18:58 min</button>
+    <button id="videoPlayerButton" class="clickable11 btn"></button>    
 
     <div id="blankSquarePopup" style="display: none;">
       <div class="popupContent">
@@ -122,68 +122,72 @@
       blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
       questionsContainer.style.display = showQuestions ? "block" : "none";
     }
+  function storeButtonClick(buttonId) {
+    // Extract button number from buttonId
+    const buttonNumber = buttonId.replace("btn", "");
+    
+    // Store button number in data attribute
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    btnPlayPause.dataset.songIndex = buttonNumber;
+  }
+
 
     function submitForm() {
-      const form = document.getElementById('rechargeForm');
-      const formData = new FormData(form);
-      const csvContent = [];
+  // Require Electron's remote module
+  const { remote } = require('electron');
+  const fs = remote.require('fs');
+  const path = require('path');
+  const form = document.getElementById('rechargeForm');
+  const formData = new FormData(form);
+  
+  // Prepare the values array for CSV content
+  const values = [];
 
-      // Create a single row for headers and another for values
-      const headers = [];
-      const values = [];
+  // Extract form field values into the values array
+  formData.forEach((value) => {
+    values.push(value);
+  });
 
-      formData.forEach((value, name) => {
-        headers.push(name);
-        values.push(value);
-      });
+  // gather which song was playing
+  const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
+  // Add song number to values array
+    values.push(songIndex); 
 
-      // Add headers and values to csvContent
-      csvContent.push(headers.join(','));
-      csvContent.push(values.join(','));
+    // Add location to values array
+    values.push("Breda1"); 
 
-      // Add date and time to the values row
-      const time = new Date();
+  // Add date and time to the values array
+  const time = new Date();
+  const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+  const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+  
+  // Add formatted date and time to values array
+  values.push(formattedDate, formattedTime); 
 
-      // Format the date and time
-      const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-      const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+  // Join values array into a CSV row
+  const csvRow = values.join(',');
 
-      // Add formatted date and time to the values row
-      values.push(formattedDate, formattedTime);
+  // Determine the file path for saving
+  const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
 
-      // Add the updated values row to csvContent
-      csvContent.push(values.join(','));
-
-      // Join with newline characters for proper CSV format
-      const csvData = csvContent.join('\n');
-
-      // Require Electron's remote module
-      const { remote } = require('electron');
-      const fs = remote.require('fs');
-      const path = require('path');
-
-      // Determine the file path for saving
-      const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
-
-      // Append the CSV data to the file
-      fs.appendFile(filePath, csvData + '\n', (err) => {
-        if (err) {
-          console.error('Error appending to file:', err);
-          return;
-        }
-        console.log('Data successfully appended to file:', filePath);
-      });
-
-      // Reset the form
-      form.reset();
-      toggleBlankSquarePopup();
-      // restart the app
-      location.reload();
+  // Append the CSV row to the file
+  fs.appendFile(filePath, csvRow + '\n', (err) => {
+    if (err) {
+      console.error('Error appending to file:', err);
+      return;
     }
+    console.log('Data successfully appended to file:', filePath);
+  });
 
-    window.onload = function() {
-      toggleBlankSquarePopup();
-    };
+  // Reset the form
+  form.reset();
+
+  // Close the popup
+  toggleBlankSquarePopup();
+
+  // Reload the page
+  location.reload();
+}
   </script>
 </body>
 </html>
