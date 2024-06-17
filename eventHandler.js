@@ -181,3 +181,70 @@ function toggleBlankSquarePopup(text, showQuestions) {
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
 }
+
+function storeButtonClick(buttonId) {
+    // Extract button number from buttonId
+    const buttonNumber = buttonId.replace("btn", "");
+    
+    // Store button number in data attribute
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    btnPlayPause.dataset.songIndex = buttonNumber;
+}
+
+
+    function submitForm() {
+// Require Electron's remote module
+const { remote } = require('electron');
+const fs = remote.require('fs');
+const path = require('path');
+const form = document.getElementById('rechargeForm');
+const formData = new FormData(form);
+
+  // Prepare the values array for CSV content
+const values = [];
+
+  // Extract form field values into the values array
+    formData.forEach((value) => {
+    values.push(value);
+});
+
+  // gather which song was playing
+const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
+  // Add song number to values array
+    values.push(songIndex); 
+
+    // Add location to values array
+    values.push("Breda1"); 
+
+  // Add date and time to the values array
+const time = new Date();
+const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+
+  // Add formatted date and time to values array
+values.push(formattedDate, formattedTime); 
+
+  // Join values array into a CSV row
+const csvRow = values.join(',');
+
+  // Determine the file path for saving
+const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+
+  // Append the CSV row to the file
+fs.appendFile(filePath, csvRow + '\n', (err) => {
+    if (err) {
+    console.error('Error appending to file:', err);
+    return;
+    }
+    console.log('Data successfully appended to file:', filePath);
+});
+
+  // Reset the form
+form.reset();
+
+  // Close the popup
+toggleBlankSquarePopup();
+
+  // Reload the page
+location.reload();
+}
