@@ -124,54 +124,53 @@
     }
 
     function submitForm() {
-  const form = document.getElementById('rechargeForm');
-  const formData = new FormData(form);
-  const csvContent = [];
+      const form = document.getElementById('rechargeForm');
+      const formData = new FormData(form);
+      const csvContent = [];
 
-  // Transpose the form data to save vertically
-  const formDataArray = Array.from(formData.entries());
-  const transposedFormData = formDataArray.reduce((acc, [name, value]) => {
-    if (!acc[name]) {
-      acc[name] = [value];
-    } else {
-      acc[name].push(value);
+      // Transpose the form data to save vertically
+      const formDataArray = Array.from(formData.entries());
+      const transposedFormData = formDataArray.reduce((acc, [name, value]) => {
+        if (!acc[name]) {
+          acc[name] = [value];
+        } else {
+          acc[name].push(value);
+        }
+        return acc;
+      }, {});
+
+      // Iterate through each form field and value
+      Object.entries(transposedFormData).forEach(([name, values]) => {
+        csvContent.push(`${name}:`);
+        values.forEach(value => {
+          csvContent.push(value);
+        });
+      });
+      csvContent.push('\n'); 
+
+      // Join with newline characters for proper CSV format
+      const csvData = csvContent.join('\n');
+
+      // Require Electron's remote module
+      const { remote } = require('electron');
+      const fs = remote.require('fs');
+      const path = require('path');
+
+      // Determine the file path for saving
+      const filePath = 'C:\\Users\\jkors\\Dropbox\\RechargeCocoon_data\\RechargeCocoon_test_jasper\\survey_results.csv';
+
+      // Append the CSV data to the file
+      fs.appendFile(filePath, csvData + '\n', (err) => {
+        if (err) {
+          console.error('Error appending to file:', err);
+          return;
+        }
+        console.log('Data successfully appended to file:', filePath);
+      });
+
+      // Reset the form
+      form.reset();
     }
-    return acc;
-  }, {});
-
-  // Iterate through each form field and value
-  Object.entries(transposedFormData).forEach(([name, values]) => {
-    csvContent.push(`${name}:`);
-    values.forEach(value => {
-      csvContent.push(value);
-    });
-  });
-  csvContent.push('\n'); 
-
-  // Join with newline characters for proper CSV format
-  const csvData = csvContent.join('\n');
-
-  // Require Electron's remote module
-  const { remote } = require('electron');
-  const fs = remote.require('fs');
-  const path = require('path');
-
-  // Determine the file path for saving
-  const filePath = path.join(remote.app.getPath('documents'), 'survey_results.csv');
-
-  // Append the CSV data to the file
-  fs.appendFile(filePath, csvData + '\n', (err) => {
-    if (err) {
-      console.error('Error appending to file:', err);
-      return;
-    }
-    console.log('Data successfully appended to file:', filePath);
-  });
-
-  // Reset the form
-  form.reset();
-}
-
 
     window.onload = function() {
       toggleBlankSquarePopup();
