@@ -88,7 +88,7 @@ setInterval(() => {
         // Pause the music when it reaches the end of the track
         oscServer.pause(true);
         // Show popup when seek bar is full
-        showPopup("Seek bar reached 100%!");
+        //showPopup("Seek bar reached 100%!");
         
         // Reset button state and color for the currently playing song
         const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
