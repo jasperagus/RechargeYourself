@@ -128,25 +128,25 @@
       const formData = new FormData(form);
       const csvContent = [];
 
-      // Transpose the form data to save vertically
-      const formDataArray = Array.from(formData.entries());
-      const transposedFormData = formDataArray.reduce((acc, [name, value]) => {
-        if (!acc[name]) {
-          acc[name] = [value];
-        } else {
-          acc[name].push(value);
-        }
-        return acc;
-      }, {});
+      // Create a single row for headers and another for values
+      const headers = [];
+      const values = [];
 
-      // Iterate through each form field and value
-      Object.entries(transposedFormData).forEach(([name, values]) => {
-        csvContent.push(`${name}:`);
-        values.forEach(value => {
-          csvContent.push(value);
-        });
+      formData.forEach((value, name) => {
+        headers.push(name);
+        values.push(value);
       });
-      csvContent.push('\n'); 
+
+      // Add date and time to the headers and values
+      headers.push('Date', 'Time');
+      const time = new Date();
+      const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+      const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+      values.push(formattedDate, formattedTime);
+
+      // Add headers and values to csvContent
+      csvContent.push(headers.join(','));
+      csvContent.push(values.join(','));
 
       // Join with newline characters for proper CSV format
       const csvData = csvContent.join('\n');
@@ -157,8 +157,8 @@
       const path = require('path');
 
       // Determine the file path for saving
-      const filePath = 'C:\\Users\\jkors\\Dropbox\\RechargeCocoon_data\\RechargeCocoon_test_jasper\\survey_results.csv';
-
+      const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+      
       // Append the CSV data to the file
       fs.appendFile(filePath, csvData + '\n', (err) => {
         if (err) {
