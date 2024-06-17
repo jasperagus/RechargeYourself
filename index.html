@@ -137,15 +137,21 @@
         values.push(value);
       });
 
-      // Add date and time to the headers and values
-      headers.push('Date', 'Time');
-      const time = new Date();
-      const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-      const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
-      values.push(formattedDate, formattedTime);
-
       // Add headers and values to csvContent
       csvContent.push(headers.join(','));
+      csvContent.push(values.join(','));
+
+      // Add date and time to the values row
+      const time = new Date();
+
+      // Format the date and time
+      const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+      const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+
+      // Add formatted date and time to the values row
+      values.push(formattedDate, formattedTime);
+
+      // Add the updated values row to csvContent
       csvContent.push(values.join(','));
 
       // Join with newline characters for proper CSV format
@@ -157,8 +163,8 @@
       const path = require('path');
 
       // Determine the file path for saving
-      const filePath = 'C:\\Users\\jkors\\Dropbox\\RechargeCocoon_data\\RechargeCocoon_test_jasper\\survey_results.csv';
-     
+      const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+
       // Append the CSV data to the file
       fs.appendFile(filePath, csvData + '\n', (err) => {
         if (err) {
@@ -170,6 +176,9 @@
 
       // Reset the form
       form.reset();
+      toggleBlankSquarePopup();
+      // restart the app
+      location.reload();
     }
 
     window.onload = function() {

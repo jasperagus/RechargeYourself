@@ -104,8 +104,6 @@ setInterval(() => {
 
         // Reset the app after the last popup is closed and show the welcome popup again
         setTimeout(() => {
-            resetApp();
-            toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session.", false); // Don't show questions on welcome popup
         }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
     }
 }, 1000); // Update every second
