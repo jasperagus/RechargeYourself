@@ -3,24 +3,27 @@ var sendOSC = require('./osc.js');
 let isPopupShown = false; 
 var oscServer = new sendOSC();
 
+// Welcome popup
+window.onload = function() {
+    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false); // Don't show questions on welcome popup
+};
+// Function to handle the play/pause button click
 function handleButtonClick(songIndex) {
     const button = document.getElementById(`btn${songIndex}`);
     const isPlaying = button.dataset.isPlaying === "true";
     if (isPlaying) {
         oscServer.pause(true);
-        
-        // Reset button color when the song stops
         updateButtonColor(songIndex, false);
     } else {
         oscServer.music(songIndex);
         oscServer.pause(false);
-        
         // Change button color when the song starts playing
         updateButtonColor(songIndex, true);
     }
     button.dataset.isPlaying = !isPlaying;
 }
 
+// Function to update the button color and text based on the song index and playing state
 function updateButtonColor(songIndex, isPlaying) {
     const songNames = [
         "Korte Relaxsessie - 12:15 min",
@@ -49,10 +52,20 @@ function updateButtonColor(songIndex, isPlaying) {
 // Add event listener to the song buttons
 for (let i = 1; i <= 10; i++) {
     const button = document.getElementById(`btn${i}`);
-    button.dataset.isPlaying = "false"; // Initialize the data attribute
+    button.dataset.isPlaying = "false"; 
     button.addEventListener('click', () => {
         handleButtonClick(i);
     });
+}
+
+// Function to store the button number in the data attribute
+function storeButtonClick(buttonId) {
+    // Extract button number from buttonId
+    const buttonNumber = buttonId.replace("btn", "");
+    
+    // Store button number in data attribute
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    btnPlayPause.dataset.songIndex = buttonNumber;
 }
 
 // Function to update the seek position when the user changes the progress bar value
@@ -60,7 +73,7 @@ function updateSeekPosition() {
     const seekBar = document.getElementById("seekBar");
     const audioDuration = oscServer.sound.duration();
     const newPosition = parseInt(seekBar.value) / 100 * audioDuration;
-    oscServer.sound.seek(newPosition); // Seek to the new position in the audio file
+    oscServer.sound.seek(newPosition);
 }
 
 // Add event listener to the seekBar input element
@@ -72,43 +85,6 @@ function updateTimerDisplay(currentTime) {
     timerDisplay.textContent = formatTime(currentTime);
 }
 
-// Modify your setInterval function to update the timer display
-setInterval(() => {
-    const seekBar = document.getElementById("seekBar");
-    const audioDuration = oscServer.sound.duration();
-    const currentTime = oscServer.sound.seek(); // Current playback time
-
-    const newPosition = (currentTime / audioDuration) * 100; // Calculate percentage progress
-    seekBar.value = newPosition; // Update the seek bar value
-    updateBattery(currentTime, audioDuration);
-    
-    updateTimerDisplay(currentTime); // Update the timer display
-
-    // Check if the seek bar reaches 100% or resets to 0%
-    if (newPosition === 100) {
-        // Pause the music when it reaches the end of the track
-        oscServer.pause(true);
-        // Show popup when seek bar is full
-        //showPopup("Seek bar reached 100%!");
-        
-        // Reset button state and color for the currently playing song
-        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
-        resetButtonStateAndColor(playingButtonIndex);
-    } else if (newPosition === 0 && !isPopupShown) {
-        // Show popup only once when seek bar resets to 0%
-        toggleBlankSquarePopup("Song ended! How was your experience?", true); // Call the function with the appropriate text and true to show questions
-        isPopupShown = true; // Set flag to indicate popup has been shown
-
-        // Reset button state and color for the currently playing song
-        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
-        resetButtonStateAndColor(playingButtonIndex);
-
-        // Reset the app after the last popup is closed and show the welcome popup again
-        setTimeout(() => {
-        }, 5000); // Show welcome popup again after a delay (e.g., 5 seconds)
-    }
-}, 1000); // Update every second
-
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
@@ -119,18 +95,26 @@ function padZero(number) {
     return (number < 10 ? '0' : '') + number;
 }
 
-// Function to reset button state and color for the given song index
-function resetButtonStateAndColor(songIndex) {
-    const button = document.getElementById(`btn${songIndex}`);
-    button.dataset.isPlaying = "false";
-    updateButtonColor(songIndex, false);
-}
+// Modify your setInterval function to update the timer display
+setInterval(() => {
+    const seekBar = document.getElementById("seekBar");
+    const audioDuration = oscServer.sound.duration();
+    const currentTime = oscServer.sound.seek();
+    const newPosition = (currentTime / audioDuration) * 100;
+    seekBar.value = newPosition; 
+    updateBattery(currentTime, audioDuration);
+    updateTimerDisplay(currentTime);
 
-// Function to show popup
-function showPopup(message) {
-    // Replace this with your popup display logic
-    alert(message);
-}
+    // Check if the seek bar reaches 0% and the popup is not shown
+        if (newPosition === 0 && !isPopupShown) {
+        toggleBlankSquarePopup("Song ended! How was your experience?", true); 
+        isPopupShown = true;
+
+        // Reset button state and color for the currently playing song
+        const playingButtonIndex = parseInt(document.querySelector('[data-is-playing="true"]').id.replace("btn", ""));
+        resetButtonStateAndColor(playingButtonIndex);
+    }
+}, 1000); // Update every second
 
 // Function to update the battery
 function updateBattery(currentTime, audioDuration) {
@@ -147,6 +131,13 @@ function updateBattery(currentTime, audioDuration) {
     });
 }
 
+// Function to reset button state and color for the given song index
+function resetButtonStateAndColor(songIndex) {
+    const button = document.getElementById(`btn${songIndex}`);
+    button.dataset.isPlaying = "false";
+    updateButtonColor(songIndex, false);
+}
+
 // Function to toggle the video player popup
 function toggleVideoPopup() {
     const videoPopup = document.getElementById("videoPlayerPopup");
@@ -156,43 +147,10 @@ function toggleVideoPopup() {
 // Add event listener to the video player button
 document.getElementById("videoPlayerButton").addEventListener('click', toggleVideoPopup);
 
-window.onload = function() {
-    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false); // Don't show questions on welcome popup
-};
-
 // Add event listener to the top left button to toggle the blank square popup
 document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
 
-function resetApp() {
-    // Reset any necessary variables or states
-    isPopupShown = false; // Reset popup flag
-    oscServer.reset(); // Reset the OSC server
-    // Reset any other app-specific states or variables
-}
-
-function toggleBlankSquarePopup(text, showQuestions) {
-    const blankSquarePopup = document.getElementById("blankSquarePopup");
-    const popupContent = blankSquarePopup.querySelector(".popupContent");
-    const popupText = popupContent.querySelector("p");
-    const submitButton = popupContent.querySelector(".submitButton");
-    const questionsContainer = popupContent.querySelector(".questionsContainer");
-    popupText.textContent = text; // Set the text content dynamically
-    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
-    questionsContainer.style.display = showQuestions ? "block" : "none";
-    submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
-}
-
-function storeButtonClick(buttonId) {
-    // Extract button number from buttonId
-    const buttonNumber = buttonId.replace("btn", "");
-    
-    // Store button number in data attribute
-    const btnPlayPause = document.getElementById('btnPlayPause');
-    btnPlayPause.dataset.songIndex = buttonNumber;
-}
-
-
-    function submitForm() {
+function submitForm() {
 // Require Electron's remote module
 const { remote } = require('electron');
 const fs = remote.require('fs');
@@ -213,7 +171,7 @@ const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
   // Add song number to values array
     values.push(songIndex); 
 
-    // Add location to values array
+    // Add location to values array (location is hardcoded, change if needed)
     values.push("Breda1"); 
 
   // Add date and time to the values array
@@ -247,4 +205,17 @@ toggleBlankSquarePopup();
 
   // Reload the page
 location.reload();
+}
+
+// Function to toggle the blank square popup
+function toggleBlankSquarePopup(text, showQuestions) {
+    const blankSquarePopup = document.getElementById("blankSquarePopup");
+    const popupContent = blankSquarePopup.querySelector(".popupContent");
+    const popupText = popupContent.querySelector("p");
+    const submitButton = popupContent.querySelector(".submitButton");
+    const questionsContainer = popupContent.querySelector(".questionsContainer");
+    popupText.textContent = text; // Set the text content dynamically
+    blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
+    questionsContainer.style.display = showQuestions ? "block" : "none";
+    submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
 }
