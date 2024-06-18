@@ -18,7 +18,7 @@ Tickets van Akash:
 Tickets van Jasper:
 * Proof of concept exporting naar excel.  (Done)
 * Vragenlijst after exporten excel.  (Done)
-* excel exporten naar dropbox.  (not done)
+* excel exporten naar dropbox.  (Done)
 
 
 Vragenlijst:
