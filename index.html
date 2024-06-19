@@ -11,6 +11,9 @@
 </head>
 <body>
   <div id="project_container">
+    <div id="logo">
+      <img src="../images/recharge yourself met symbool transparant.png" alt="Recharge Yourself Logo">
+    </div>
     <div id="projectbox">
       <!-- Start project HTML -->
       <div class="battery-container">
@@ -34,6 +37,7 @@
 
     <div class="music-player">
       <button hidden id="btnPlayPause">Play</button>
+      <div id="timerDisplay">00:00</div>
       <input type="range" id="seekBar" min="0" value="0" step="1">
       <div id="timerDisplay">00:00</div>
     </div>
@@ -52,9 +56,12 @@
 
     <div id="blankSquarePopup" style="display: none;">
       <div class="popupContent">
+        <div class="popupBackground"></div> <!-- Background image -->
         <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
-        <div class="welcomeMessage">
-          <p>Welcome to <span style="font-weight: bold;">Recharge Yourself!</span></p>
+        <div class="welcomeMessage" id="welcomeMessage">
+          <h2>Welcome to <span style="font-weight: bold;">Recharge Cocoon!</span></h2>
+          <p>New, click the top right video.</p>
+          <p>Been before, click X and choose your session.</p>
         </div>
         <div class="questionsContainer">
           <h4>Hoe voelde je je voorafgaande aan deze sessie?</h4>

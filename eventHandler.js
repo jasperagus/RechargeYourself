@@ -212,9 +212,15 @@ function toggleBlankSquarePopup(text, showQuestions) {
     const blankSquarePopup = document.getElementById("blankSquarePopup");
     const popupContent = blankSquarePopup.querySelector(".popupContent");
     const popupText = popupContent.querySelector("p");
+    const welcomeMessage = popupContent.querySelector("#welcomeMessage"); // Select welcome message
     const submitButton = popupContent.querySelector(".submitButton");
     const questionsContainer = popupContent.querySelector(".questionsContainer");
+    
     popupText.textContent = text; // Set the text content dynamically
+    
+    // Show or hide welcome message based on text presence
+    welcomeMessage.style.display = text ? "block" : "none";
+    
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
