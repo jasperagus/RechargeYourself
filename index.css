@@ -215,10 +215,9 @@ body {
   border-radius: 10px;
 }
 
-/* Updated button styling for the video player button */
 #videoPlayerButton {
   position: fixed;
-  top: 20px;
+  top: 10px; /* Adjust this value to move the button higher */
   right: 20px; /* Adjust the distance from the right edge */
   background-color: #b6b6b6;
   border: none;
