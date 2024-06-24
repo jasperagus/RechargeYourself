@@ -44,33 +44,28 @@ body {
 /* Adjusted top position for the first button */
 .clickable1 {
   top: 35%;
-  left: 15%;
-  width: 630px;
+  left: 11%;
 }
 
 /* Reduced space between buttons */
 .clickable2 {
   top: 42%;
-  left: 15%;
-  width: 630px;
+  left: 11%;
 }
 
 .clickable3 {
   top: 49%;
-  left: 15%;
-  width: 630px;
+  left: 11%;
 }
 
 .clickable4 {
   top: 56%;
-  left: 15%;
-  width: 630px;
+  left: 11%;
 }
 
 .clickable5 {
   top: 63%;
-  left: 15%;
-  width: 630px;
+  left: 11%;
 }
 
 .clickable6 {
