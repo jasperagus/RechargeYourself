@@ -13,9 +13,10 @@ Tickets van Akash:
 
  * Recharge yourself vervangen door "Charging" (Done)
  * Logo links boven vervangen met button(zie website) (Done)
- * battery naar links (Done)
+ * Seekbar for now (Done)
  * Popup fixen(in progress)
- 
+ * battery needs to be smaller (in progress)
+
 Tickets van Jasper:
 * Proof of concept exporting naar excel.  (Done)
 * Vragenlijst after exporten excel.  (Done)
