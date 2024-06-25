@@ -383,7 +383,6 @@ body {
 }
 
 .welcomeMessage {
-  text-align: center; /* Center the text */
   margin-bottom: 20px; /* Add space between welcome message and questions */
 }
 
@@ -491,7 +490,7 @@ body {
   background-image: url('../src/images/RechargeYourself.jpg'); /* Background image */
   background-size: cover; /* Adjust background size */
   background-position: center; /* Center the background image */
-  opacity: 0.2; /* Opacity of the background image */
+  opacity: 0.05; /* Opacity of the background image */
   z-index: -1; /* Ensure the pseudo-element is behind the content */
   border-radius: 5px; /* Match the border-radius of the main container */
 }
@@ -514,6 +513,3 @@ body {
   border: none;
   cursor: pointer;
 }
-
-
-
