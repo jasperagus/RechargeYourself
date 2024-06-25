@@ -93,13 +93,6 @@ body {
   left: 48.5%;
 }
 
-.music-player {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 170px; 
-}
-
 .player-btn {
   right: 50%;
   outline: none;
@@ -114,12 +107,14 @@ body {
   border-radius: 10px;
   margin: 0 10px;
 }
-
+/* Seekbar styles */
 #seekBar {
-  width: 200%; /* Adjust the width as needed */
-  height: 50px; /* Increase the height for better visibility */
-  margin-bottom: 10px; /* Add space between the seek bar and buttons */
+  width: 100%; /* Use 100% width to be responsive */
+  height: 20px; /* Adjust height as needed */
+  margin-bottom: 10px; /* Space between the seek bar and buttons */
   display: block;
+  flex-grow: 1;
+  margin: 0 5px; /* Adjusted margin for seek bar */
 }
 
 /* Music player popup */
@@ -128,11 +123,32 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 300px;
+  width: 90%; /* Use a percentage to ensure responsiveness */
+  max-width: 300px; /* Maximum width to prevent it from getting too large */
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   overflow: hidden;
+}
+
+.music-player-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 170px; 
+  width: 100%;
+}
+
+.music-player {
+  display: flex;
+  align-items: center;
+  width: 90%; /* Make it full width */
+  max-width: 300px; /* Prevent it from getting too wide */
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .music-player-popup header {
@@ -161,6 +177,23 @@ body {
   width: 100%;
   margin-top: 10px;
 }
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .music-player-container {
+    bottom: 100px; /* Adjust position for smaller screens */
+  }
+}
+
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .music-player {
+    bottom: 100px; /* Adjust position for smaller screens */
+    width: 90%; /* Ensure it fits within smaller screens */
+  }
+}
+
 
 /* Video player popup */
 .video-player-popup {
@@ -428,17 +461,7 @@ body {
   height: auto; /* Maintain the aspect ratio */
 }
 
-.music-player {
-  display: flex;
-  align-items: center;
-  width: 10cm;
-  margin: 20px;
-  padding: 2px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-}
 
 #timerDisplay {
   margin-left: 10px;
@@ -446,10 +469,7 @@ body {
   font-size: 14px;
 }
 
-#seekBar {
-  flex-grow: 1;
-  margin: 0 5px; /* Adjusted margin for seek bar */
-}
+
 
 #blankSquarePopup {
   display: none;
@@ -502,7 +522,6 @@ body {
   color: #333; /* Modify color as needed */
   text-align: center; /* Center text within its own container */
 }
-
 
 .closeButton {
   position: absolute;
