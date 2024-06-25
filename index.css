@@ -251,8 +251,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 10%; /* Adjust top position as needed */
+  position: fixed;
+  top: 15%; /* Adjust top position as needed */
   left: 50%;
   transform: translateX(-50%);
   width: 100%; /* Ensures the container takes up the full width of the screen */
@@ -261,7 +261,7 @@ body {
 /* Battery styles */
 .battery {
   padding: 10px 10px;
-  width: 420px;
+  width: 22,8%;
   border: solid  20px #000;
 }
 
