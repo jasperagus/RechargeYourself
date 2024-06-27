@@ -254,10 +254,10 @@ body {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 14%; /* Adjust top position as needed */
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; /* Adjust the width to make it smaller */
+  width: 100%;
 }
 
 /* Battery styles */
