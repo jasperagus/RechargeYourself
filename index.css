@@ -262,7 +262,7 @@ body {
 
 /* Battery styles */
 .battery {
-  padding: 8px 8px; /* Slightly increase padding */
+  padding: 1% 1%; /* Slightly increase padding */
   width: 20%; /* Slightly increase width */
   border: solid 14px #000; /* Slightly increase border thickness */
 }
