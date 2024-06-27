@@ -342,6 +342,7 @@ body {
 
 .toggleBlankSquarePopup {
   text-align: center;
+  
 }
 
 .toggleBlankSquarePopup button {
@@ -363,6 +364,8 @@ body {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   align-items: center; /* Center horizontally */
+  font-size: 18px;
+
 }
 
 .closeButton {
@@ -476,19 +479,46 @@ body {
 }
 
 .welcomeMessage {
-  margin-top: -20px; /* Move it 20px higher */
-  margin-bottom: 20px;
-  font-size: 19px;
+  font-size: 30px;
   color: #333; /* Modify color as needed */
   text-align: center; /* Center text within its own container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .closeButton {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 20px;
+  font-size: 30px;
   background: none;
   border: none;
   cursor: pointer;
+}
+
+#welcomeMessage h1 {
+  margin-top: -200px; /* Adjust as needed */
+}
+
+.instructions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 220px; /* Adjust as needed to move the instructions down */
+}
+
+.instructions div {
+  flex: 1;
+  text-align: center;
+  margin: 0 50px; /* Adjust spacing between columns as needed */
+}
+
+.instructions div h6 {
+  margin: 10px 0; /* Adjust spacing between steps as needed */
+}
+.instructions .new-here,
+.instructions .been-before {
+  border: 5px solid #000000; /* Border style */
+  padding: 10px; /* Padding inside the border */
 }
