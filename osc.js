@@ -13,16 +13,36 @@ const client = new Client('127.0.0.1', 9001, () => {
 
 class sendOSC {
     constructor() {
-        this.index = 0;
-        this.firstClick = true;
+        this.isPlaying = false;
         this.sound = new Howl({
             src: ['./NOTbackground.mp3'],
-            autoplay: true,
+            autoplay: false,
             loop: false,
             volume: 1
         });
-    }
 
+        // Track playback progress
+        this.sound.on('play', () => {
+            this.isPlaying = true;
+            this.startProgressTracking();
+        });
+
+        this.sound.on('pause', () => {
+            this.isPlaying = false;
+            this.stopProgressTracking();
+        });
+
+        this.sound.on('stop', () => {
+            this.isPlaying = false;
+            this.stopProgressTracking();
+        });
+
+        this.sound.on('end', () => {
+            this.isPlaying = false;
+            this.stopProgressTracking();
+        });
+    }
+    
     music(value) {
         if (this.firstClick) {
             this.firstClick = false;
@@ -77,12 +97,6 @@ class sendOSC {
             this.sound.play();
             console.log("play");
         }
-    }
-
-
-    listen() {
-        console.log("listening")
-        server.on('message', (msg) => { this.pause(); console.log("message recieved") });
     }
 }
 

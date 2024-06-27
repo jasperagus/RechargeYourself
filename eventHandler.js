@@ -5,8 +5,9 @@ var oscServer = new sendOSC();
 
 // Welcome popup
 window.onload = function() {
-    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false); // Don't show questions on welcome popup
+    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session.", false); // Don't show questions on welcome popup
 };
+
 // Function to handle the play/pause button click
 function handleButtonClick(songIndex) {
     const button = document.getElementById(`btn${songIndex}`);
@@ -33,19 +34,18 @@ function updateButtonColor(songIndex, isPlaying) {
         "Sublimale muzieksessie - 15:00 min",
         "Recharge sessie - 15:00 min",
         "Jezelf opladen - 16:31 min",
-        "Loslaten negatieve emoties - 18.42 min",
-        "Emotionele balans - 17.02 min",
+        "Loslaten negatieve emoties - 18:42 min",
+        "Emotionele balans - 17:02 min",
         "Beter eetpatroon - 18:58 min"
     ];
 
     const button = document.getElementById(`btn${songIndex}`);
     if (isPlaying) {
-        button.style.backgroundColor = "#ad9bb5";
-        button.innerText = `${songIndex}. ${songNames[songIndex - 1]} - Playing`;
-
-    } else {
         button.style.backgroundColor = "#b6b6b6";
         button.innerText = `${songIndex}. ${songNames[songIndex - 1]}`;
+    } else {
+        button.style.backgroundColor = "#ad9bb5";
+        button.innerText = `${songIndex}. ${songNames[songIndex - 1]} - Playing`;
     }
 }
 
@@ -69,11 +69,11 @@ function storeButtonClick(buttonId) {
 }
 
 // Function to update the seek position when the user changes the progress bar value
-function updateSeekPosition() {
-    const seekBar = document.getElementById("seekBar");
-    const audioDuration = oscServer.sound.duration();
-    const newPosition = parseInt(seekBar.value) / 100 * audioDuration;
-    oscServer.sound.seek(newPosition);
+function updateSeekbarPosition() {
+    const seekBar = document.getElementById('seekBar');
+    const audioDuration = oscServer.sound.duration(); // Get total duration of the audio
+    const currentTime = oscServer.sound.seek(); // Get current playback time
+    seekBar.value = (currentTime / audioDuration) * 100; // Update seekbar position
 }
 
 // Add event listener to the seekBar input element
@@ -82,7 +82,24 @@ document.getElementById("seekBar").addEventListener("input", updateSeekPosition)
 // Function to update the timer display
 function updateTimerDisplay(currentTime) {
     const timerDisplay = document.getElementById("timerDisplay");
-    timerDisplay.textContent = formatTime(currentTime);
+    if (!isNaN(currentTime)) {
+        timerDisplay.textContent = formatTime(currentTime);
+    } else {
+        timerDisplay.textContent = "00:00"; // Or any default text you prefer
+    }
+}
+
+// Add event listener to the seekbar input element
+document.getElementById('seekBar').addEventListener('input', function() {
+    const seekBar = document.getElementById('seekBar');
+    const audioDuration = oscServer.sound.duration(); // Get total duration of the audio
+    const newPosition = (seekBar.value / 100) * audioDuration; // Calculate new playback position
+    oscServer.sound.seek(newPosition); // Seek to the new position
+});
+
+function updateTimer() {
+    const elapsedTime = oscServer.getElapsedTime();
+    updateTimerDisplay(elapsedTime);
 }
 
 function formatTime(seconds) {
@@ -98,16 +115,22 @@ function padZero(number) {
 // Modify your setInterval function to update the timer display
 setInterval(() => {
     const seekBar = document.getElementById("seekBar");
-    const audioDuration = oscServer.sound.duration();
-    const currentTime = oscServer.sound.seek();
+    const audioDuration = oscServer.sound.duration(); // Get total duration of the audio
+    const currentTime = oscServer.sound.seek(); // Get current playback time
     const newPosition = (currentTime / audioDuration) * 100;
-    seekBar.value = newPosition; 
+    
+    // Update seek bar position
+    updateSeekbarPosition();
+    
+    // Update battery display
     updateBattery(currentTime, audioDuration);
+    
+    // Update timer display
     updateTimerDisplay(currentTime);
 
     // Check if the seek bar reaches 0% and the popup is not shown
-        if (newPosition === 0 && !isPopupShown) {
-        toggleBlankSquarePopup("Song ended! How was your experience?", true); 
+    if (newPosition === 0 && !isPopupShown) {
+        toggleBlankSquarePopup("Song ended! How was your experience?", true);
         isPopupShown = true;
 
         // Reset button state and color for the currently playing song
@@ -115,6 +138,7 @@ setInterval(() => {
         resetButtonStateAndColor(playingButtonIndex);
     }
 }, 1000); // Update every second
+
 
 // Function to update the battery
 function updateBattery(currentTime, audioDuration) {
@@ -151,60 +175,60 @@ document.getElementById("videoPlayerButton").addEventListener('click', toggleVid
 document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
 
 function submitForm() {
-// Require Electron's remote module
-const { remote } = require('electron');
-const fs = remote.require('fs');
-const path = require('path');
-const form = document.getElementById('rechargeForm');
-const formData = new FormData(form);
+    // Require Electron's remote module
+    const { remote } = require('electron');
+    const fs = remote.require('fs');
+    const path = require('path');
+    const form = document.getElementById('rechargeForm');
+    const formData = new FormData(form);
 
-  // Prepare the values array for CSV content
-const values = [];
+    // Prepare the values array for CSV content
+    const values = [];
 
-  // Extract form field values into the values array
+    // Extract form field values into the values array
     formData.forEach((value) => {
-    values.push(value);
-});
+        values.push(value);
+    });
 
-  // gather which song was playing
-const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
-  // Add song number to values array
+    // Gather which song was playing
+    const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
+    // Add song number to values array
     values.push(songIndex); 
 
     // Add location to values array (location is hardcoded, change if needed)
     values.push("Breda1"); 
 
-  // Add date and time to the values array
-const time = new Date();
-const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+    // Add date and time to the values array
+    const time = new Date();
+    const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+    const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
 
-  // Add formatted date and time to values array
-values.push(formattedDate, formattedTime); 
+    // Add formatted date and time to values array
+    values.push(formattedDate, formattedTime); 
 
-  // Join values array into a CSV row
-const csvRow = values.join(',');
+    // Join values array into a CSV row
+    const csvRow = values.join(',');
 
-  // Determine the file path for saving
-const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+    // Determine the file path for saving
+    const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
 
-  // Append the CSV row to the file
-fs.appendFile(filePath, csvRow + '\n', (err) => {
-    if (err) {
-    console.error('Error appending to file:', err);
-    return;
-    }
-    console.log('Data successfully appended to file:', filePath);
-});
+    // Append the CSV row to the file
+    fs.appendFile(filePath, csvRow + '\n', (err) => {
+        if (err) {
+            console.error('Error appending to file:', err);
+            return;
+        }
+        console.log('Data successfully appended to file:', filePath);
+    });
 
-  // Reset the form
-form.reset();
+    // Reset the form
+    form.reset();
 
-  // Close the popup
-toggleBlankSquarePopup();
+    // Close the popup
+    toggleBlankSquarePopup();
 
-  // Reload the page
-location.reload();
+    // Reload the page
+    location.reload();
 }
 
 // Function to toggle the blank square popup
