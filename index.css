@@ -269,7 +269,7 @@ body {
 
 .battery:after {
   content: " ";
-  width: 8px; /* Slightly increase width */
+  width: 10px; /* Slightly increase width */
   background: #FFF;
 }
 
@@ -277,8 +277,8 @@ body {
   cursor: pointer;
   display: inline-block;
   width: 0;
-  border: solid 5px #000; /* Slightly increase border thickness */
-  padding: 12px; /* Slightly increase padding */
+  border: solid 7px #000; /* Slightly increase border thickness */
+  padding: 2%; /* Slightly increase padding */
   height: 30px; /* Slightly increase height */
   background: transparent;
   transition: background 1s;
