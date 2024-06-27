@@ -93,13 +93,6 @@ body {
   left: 48.5%;
 }
 
-.music-player {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 170px; 
-}
-
 .player-btn {
   right: 50%;
   outline: none;
@@ -114,53 +107,52 @@ body {
   border-radius: 10px;
   margin: 0 10px;
 }
-
-#seekBar {
-  width: 200%; /* Adjust the width as needed */
-  height: 50px; /* Increase the height for better visibility */
-  margin-bottom: 10px; /* Add space between the seek bar and buttons */
-  display: block;
-}
-
-/* Music player popup */
-.music-player-popup {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.music-player-popup header {
+/* Music player container */
+.music-player-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #444;
-  color: #fff;
-}
-
-.music-player-popup .player-body {
-  padding: 10px;
-}
-
-.music-player-popup .player-body ul {
-  list-style: none;
-  padding: 0;
-}
-
-.music-player-popup .player-body ul li {
-  margin: 5px 0;
-}
-
-.music-player-popup .player-body audio {
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 15%;
   width: 100%;
-  margin-top: 10px;
+  padding: 0 20%;
+  box-sizing: border-box;
+  transform: translateX(-4%);
 }
+
+/* Music player */
+.music-player {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Make it full width */
+  max-width: 65%; /* Prevent it from getting too wide */
+  padding: 1%; /* Adjust padding */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Seekbar styles */
+#seekBar {
+  width: 100%; /* Use 100% width to be responsive */
+  height: 20px; /* Adjust height as needed */
+  margin: 0 1%; /* Adjusted margin for seek bar */
+  flex-grow: 1; /* Allow seekbar to grow and fill available space */
+}
+
+#timerDisplay {
+  margin-right: 2%; /* Space between timer and seekbar */
+  color: #fff; /* Timer text color */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .music-player {
+    padding: 1%;
+  }
+}
+
+
 
 /* Video player popup */
 .video-player-popup {
@@ -261,24 +253,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 10%; /* Adjust top position as needed */
+  position: fixed;
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; /* Ensures the container takes up the full width of the screen */
+  width: 100%;
 }
 
 /* Battery styles */
 .battery {
-  padding: 10px 10px;
-  width: 420px;
-  border: solid  20px #000;
+  padding: 1% 1%; /* Slightly increase padding */
+  width: 20%; /* Slightly increase width */
+  border: solid 14px #000; /* Slightly increase border thickness */
 }
 
 .battery:after {
   content: " ";
-  width: 7px;
-  position: absolute;
+  width: 10px; /* Slightly increase width */
   background: #FFF;
 }
 
@@ -286,9 +277,9 @@ body {
   cursor: pointer;
   display: inline-block;
   width: 0;
-  border: solid  5px #000;
-  padding: 14px;
-  height: 30px;
+  border: solid 7px #000; /* Slightly increase border thickness */
+  padding: 2%; /* Slightly increase padding */
+  height: 30px; /* Slightly increase height */
   background: transparent;
   transition: background 1s;
 }
@@ -296,6 +287,8 @@ body {
 .bar.active {
   background: limegreen;
 }
+
+
 
 #blankSquarePopup {
   display: none;
@@ -383,7 +376,6 @@ body {
 }
 
 .welcomeMessage {
-  text-align: center; /* Center the text */
   margin-bottom: 20px; /* Add space between welcome message and questions */
 }
 
@@ -429,17 +421,7 @@ body {
   height: auto; /* Maintain the aspect ratio */
 }
 
-.music-player {
-  display: flex;
-  align-items: center;
-  width: 10cm;
-  margin: 20px;
-  padding: 2px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-}
 
 #timerDisplay {
   margin-left: 10px;
@@ -447,10 +429,7 @@ body {
   font-size: 14px;
 }
 
-#seekBar {
-  flex-grow: 1;
-  margin: 0 5px; /* Adjusted margin for seek bar */
-}
+
 
 #blankSquarePopup {
   display: none;
@@ -491,7 +470,7 @@ body {
   background-image: url('../src/images/RechargeYourself.jpg'); /* Background image */
   background-size: cover; /* Adjust background size */
   background-position: center; /* Center the background image */
-  opacity: 0.2; /* Opacity of the background image */
+  opacity: 0.05; /* Opacity of the background image */
   z-index: -1; /* Ensure the pseudo-element is behind the content */
   border-radius: 5px; /* Match the border-radius of the main container */
 }
@@ -504,7 +483,6 @@ body {
   text-align: center; /* Center text within its own container */
 }
 
-
 .closeButton {
   position: absolute;
   top: 10px;
@@ -514,6 +492,3 @@ body {
   border: none;
   cursor: pointer;
 }
-
-
-

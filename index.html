@@ -35,12 +35,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 
-    <div class="music-player">
-      <button hidden id="btnPlayPause">Play</button>
-      <div id="timerDisplay">00:00</div>
-      <input type="range" id="seekBar" min="0" value="0" step="1">
+    <div class="music-player-container">
+      <div class="music-player">
+        <button hidden id="btnPlayPause">Play</button>
+        <div id="timerDisplay">00:00</div>
+        <input type="range" id="seekBar" min="0" value="0" step="1">
+      </div>
     </div>
-
+    
     <button id="btn1" class="clickable1 btn" onclick="storeButtonClick(this.id)">1. Korte Relaxsessie - 12:15 min</button>
     <button id="btn2" class="clickable2 btn" onclick="storeButtonClick(this.id)">2. Diepe ontspanning - 26:14 min</button>
     <button id="btn3" class="clickable3 btn" onclick="storeButtonClick(this.id)">3. Meer rust in je hoofd - 20:49 min</button>
@@ -58,7 +60,7 @@
         <div class="popupBackground"></div> <!-- Background image -->
         <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
         <div class="welcomeMessage" id="welcomeMessage">
-          <h2>Welcome to <span style="font-weight: bold;">Recharge Cocoon!</span></h2>
+          <h1>Welcome to <span style="font-weight: bold;">Recharge Cocoon!</span></h1>
           <p></p>
         </div>
         <div class="questionsContainer">
