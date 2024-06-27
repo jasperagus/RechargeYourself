@@ -5,8 +5,9 @@ var oscServer = new sendOSC();
 
 // Welcome popup
 window.onload = function() {
-    toggleBlankSquarePopup("First time here? then click on the video icon in the upper right. Been here before? Then click on the X and enjoy your expierence." , false); // Don't show questions on welcome popup
+    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false, false); // Don't show questions on welcome popup
 };
+
 // Function to handle the play/pause button click
 function handleButtonClick(songIndex) {
     const button = document.getElementById(`btn${songIndex}`);
@@ -107,7 +108,7 @@ setInterval(() => {
 
     // Check if the seek bar reaches 0% and the popup is not shown
         if (newPosition === 0 && !isPopupShown) {
-        toggleBlankSquarePopup("Song ended! How was your experience?", true); 
+        toggleBlankSquarePopup("Song ended! How was your experience?", true, true); 
         isPopupShown = true;
 
         // Reset button state and color for the currently playing song
@@ -208,7 +209,7 @@ location.reload();
 }
 
 // Function to toggle the blank square popup
-function toggleBlankSquarePopup(text, showQuestions) {
+function toggleBlankSquarePopup(text, showQuestions, showWelcome) {
     const blankSquarePopup = document.getElementById("blankSquarePopup");
     const popupContent = blankSquarePopup.querySelector(".popupContent");
     const popupText = popupContent.querySelector("p");
@@ -218,10 +219,10 @@ function toggleBlankSquarePopup(text, showQuestions) {
     
     popupText.textContent = text; // Set the text content dynamically
     
-    // Show or hide welcome message based on text presence
-    welcomeMessage.style.display = text ? "block" : "none";
+    // Show or hide welcome message based on showWelcome parameter
+    welcomeMessage.style.display = showWelcome ? "block" : "none";
     
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
-    submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
+    submitButton.style.display = showQuestions ? "block" : "none";
 }
