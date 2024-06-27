@@ -2,15 +2,25 @@
 
 Tickets van Akash:
  * Hello world pop-up op start, in initial positie er staan. (Done)
- * Hello world tekst vervangen. (opmaken css + js)  (not done)
+ * Hello world tekst vervangen. (opmaken css + js)  (Done)
  * Before vragenlijst in hello world popup.  (Done)
  * Na nummer after vragenlijst.  (Done)
  * Na vragenlijst reset naar hello world pop up.  (Done)
 
+ * 1ste pop-up: Welcome to the recharge Cocoon (Done)
+ * New: click top right video (Done)
+ * Been before? click X and choose your session. (Done)
+
+ * Recharge yourself vervangen door "Charging" (Done)
+ * Logo links boven vervangen met button(zie website) (Done)
+ * Seekbar for now (Done)
+ * Popup fixen(in progress)
+ * battery needs to be smaller (in progress)
+
 Tickets van Jasper:
 * Proof of concept exporting naar excel.  (Done)
 * Vragenlijst after exporten excel.  (Done)
-* excel exporten naar dropbox.  (not done)
+* excel exporten naar dropbox.  (Done)
 
 
 Vragenlijst:
@@ -35,3 +45,5 @@ Neem je een pauze van je werk?
 Ga je gezond eten vandaag?
 1. Ja
 2. Nee
+
+

@@ -6,7 +6,7 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   height: 100%;
-  background: url('../images/bg.jpg') no-repeat center center fixed;
+  background: url('../src/images/bg.jpg') no-repeat center center fixed;
   background-size: contain;
 }
 
@@ -41,67 +41,56 @@ body {
   height: 20%;
 }
 
+/* Adjusted top position for the first button */
 .clickable1 {
-  top: 43%;
-  left: 15%;
-  width: 630px;
+  top: 35%;
+  left: 11%;
 }
 
+/* Reduced space between buttons */
 .clickable2 {
-  top: 49.5%;
-  left: 15%;
-  width: 630px;
+  top: 42%;
+  left: 11%;
 }
 
 .clickable3 {
-  top: 56%;
-  left: 15%;
-  width: 630px;
+  top: 49%;
+  left: 11%;
 }
 
 .clickable4 {
-  top: 62.5%;
-  left: 15%;
-  width: 630px;
+  top: 56%;
+  left: 11%;
 }
 
 .clickable5 {
-  top: 69%;
-  left: 15%;
-  width: 630px;
+  top: 63%;
+  left: 11%;
 }
 
 .clickable6 {
-  top: 43%;
+  top: 35%;
   left: 48.5%;
 }
 
 .clickable7 {
-  top: 49.5%;
+  top: 42%;
   left: 48.5%;
 }
 
 .clickable8 {
-  top: 56%;
+  top: 49%;
   left: 48.5%;
 }
 
 .clickable9 {
-  top: 62.5%;
+  top: 56%;
   left: 48.5%;
 }
 
 .clickable10 {
-  top: 69%;
+  top: 63%;
   left: 48.5%;
-}
-
-
-.music-player {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 170px; 
 }
 
 .player-btn {
@@ -118,53 +107,52 @@ body {
   border-radius: 10px;
   margin: 0 10px;
 }
-
-#seekBar {
-  width: 200%; /* Adjust the width as needed */
-  height: 50px; /* Increase the height for better visibility */
-  margin-bottom: 10px; /* Add space between the seek bar and buttons */
-  display: block;
-}
-
-/* Music player popup */
-.music-player-popup {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.music-player-popup header {
+/* Music player container */
+.music-player-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #444;
-  color: #fff;
-}
-
-.music-player-popup .player-body {
-  padding: 10px;
-}
-
-.music-player-popup .player-body ul {
-  list-style: none;
-  padding: 0;
-}
-
-.music-player-popup .player-body ul li {
-  margin: 5px 0;
-}
-
-.music-player-popup .player-body audio {
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 15%;
   width: 100%;
-  margin-top: 10px;
+  padding: 0 20%;
+  box-sizing: border-box;
+  transform: translateX(-4%);
 }
+
+/* Music player */
+.music-player {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Make it full width */
+  max-width: 65%; /* Prevent it from getting too wide */
+  padding: 1%; /* Adjust padding */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Seekbar styles */
+#seekBar {
+  width: 100%; /* Use 100% width to be responsive */
+  height: 20px; /* Adjust height as needed */
+  margin: 0 1%; /* Adjusted margin for seek bar */
+  flex-grow: 1; /* Allow seekbar to grow and fill available space */
+}
+
+#timerDisplay {
+  margin-right: 2%; /* Space between timer and seekbar */
+  color: #fff; /* Timer text color */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .music-player {
+    padding: 1%;
+  }
+}
+
+
 
 /* Video player popup */
 .video-player-popup {
@@ -214,17 +202,6 @@ body {
   border-radius: 10px;
 }
 
-
-/* Battery container */
-.battery-container {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 20%; /* Adjust top position as needed */
-  width: 100%;
-  top: 12%; /* Adjust top position as needed */
-}
-
 /* Updated button styling for the video player button */
 #videoPlayerButton {
   position: fixed;
@@ -245,28 +222,6 @@ body {
 }
 
 #videoPlayerButton:hover {
-  background-color: #ad9bb5;
-}
-
-#topLeftButton {
-  position: fixed;
-  top: 20px;
-  right: 20px; /* Adjust the distance from the right edge */
-  background-color: #b6b6b6;
-  border: none;
-  color: white;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  border-radius: 50%; /* Make it a perfect circle */
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000; /* Ensure the button appears above other elements */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#topLeftButton:hover {
   background-color: #ad9bb5;
 }
 
@@ -294,18 +249,27 @@ body {
   margin: 0;
 }
 
+.battery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
 
 /* Battery styles */
 .battery {
-  padding: 10px 10px;
-  width: 420px;
-  border: solid  20px #000;
+  padding: 1% 1%; /* Slightly increase padding */
+  width: 20%; /* Slightly increase width */
+  border: solid 14px #000; /* Slightly increase border thickness */
 }
 
 .battery:after {
   content: " ";
-  width: 7px;
-  position: absolute;
+  width: 10px; /* Slightly increase width */
   background: #FFF;
 }
 
@@ -313,9 +277,9 @@ body {
   cursor: pointer;
   display: inline-block;
   width: 0;
-  border: solid  5px #000;
-  padding: 14px;
-  height: 30px;
+  border: solid 7px #000; /* Slightly increase border thickness */
+  padding: 2%; /* Slightly increase padding */
+  height: 30px; /* Slightly increase height */
   background: transparent;
   transition: background 1s;
 }
@@ -323,6 +287,8 @@ body {
 .bar.active {
   background: limegreen;
 }
+
+
 
 #blankSquarePopup {
   display: none;
@@ -348,6 +314,8 @@ body {
   display: flex; /* Use flexbox */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  font-size: 20px;
+
 }
 
 .closeButton {
@@ -408,7 +376,6 @@ body {
 }
 
 .welcomeMessage {
-  text-align: center; /* Center the text */
   margin-bottom: 20px; /* Add space between welcome message and questions */
 }
 
@@ -438,3 +405,90 @@ body {
   color: white;
 }
 
+#project_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+#logo {
+  margin-bottom: 20px; /* Add some space below the logo */
+}
+
+#logo img {
+  width: 150px; /* Adjust the size as needed */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+
+
+#timerDisplay {
+  margin-left: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+
+
+#blankSquarePopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.popupContent {
+  position: relative;
+  width: 21cm; /* A4 paper width */
+  height: 29.7cm; /* A4 paper height */
+  max-width: 80%; /* Maximum width to keep it responsive */
+  max-height: 80vh; /* Maximum height to keep it responsive */
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: 8px solid black;
+  background-color: #fff; /* Ensures content background is still visible */
+  font-weight: bold; /* Makes the text bolder */
+}
+
+.popupContent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../src/images/RechargeYourself.jpg'); /* Background image */
+  background-size: cover; /* Adjust background size */
+  background-position: center; /* Center the background image */
+  opacity: 0.05; /* Opacity of the background image */
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
+  border-radius: 5px; /* Match the border-radius of the main container */
+}
+
+.welcomeMessage {
+  margin-top: -20px; /* Move it 20px higher */
+  margin-bottom: 20px;
+  font-size: 19px;
+  color: #333; /* Modify color as needed */
+  text-align: center; /* Center text within its own container */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
