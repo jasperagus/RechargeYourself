@@ -224,5 +224,5 @@ function toggleBlankSquarePopup(text, showQuestions, showWelcome) {
     
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
-    submitButton.style.display = showQuestions ? "block" : "none";
+    submitButton.style.display = showQuestions ? "block" : "none"; // Hide or show the submit button
 }
