@@ -5,9 +5,8 @@ var oscServer = new sendOSC();
 
 // Welcome popup
 window.onload = function() {
-    toggleBlankSquarePopup("Welcome to 'Recharge Cocoon'! New click the top right video. Been before, click X and choose your session." , false, false); // Don't show questions on welcome popup
+    toggleBlankSquarePopup(" " , false, true); // Don't show questions on welcome popup
 };
-
 // Function to handle the play/pause button click
 function handleButtonClick(songIndex) {
     const button = document.getElementById(`btn${songIndex}`);
