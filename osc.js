@@ -4,8 +4,18 @@ class sendOSC {
     constructor() {
         this.index = 0;
         this.firstClick = true;
-        this.sound = null; 
+        this.sound = null;
         this.timePosition = 0;
+
+        // Event listener for keyboard events
+        document.addEventListener('keydown', (event) => {
+            if (event.key >= '1' && event.key <= '9') {
+                const songIndex = parseInt(event.key);
+                this.music(songIndex);
+            } else if (event.key === '0') {
+                this.music(10); // Handle key '0' for song index 10
+            }
+        });
     }
 
     music(value) {
