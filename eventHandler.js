@@ -11,6 +11,13 @@ window.onload = function() {
 function handleButtonClick(songIndex) {
     const button = document.getElementById(`btn${songIndex}`);
     const isPlaying = button.dataset.isPlaying === "true";
+
+    // If a song is already playing, reset it to its original state
+    const currentlyPlayingButton = document.querySelector('[data-is-playing="true"]');
+    if (currentlyPlayingButton && currentlyPlayingButton.id !== button.id) {
+        resetButtonStateAndColor(parseInt(currentlyPlayingButton.id.replace("btn", "")));
+    }
+
     if (isPlaying) {
         oscServer.pause(true);
         updateButtonColor(songIndex, false);
@@ -105,8 +112,8 @@ setInterval(() => {
     updateBattery(currentTime, audioDuration);
     updateTimerDisplay(currentTime);
 
-    // Check if the seek bar reaches 0% and the popup is not shown
-        if (newPosition === 0 && !isPopupShown) {
+    // Check if the song has ended
+    if (newPosition === 0 && !isPopupShown) {
         toggleBlankSquarePopup("Song ended! How was your experience?", true, true); 
         isPopupShown = true;
 
