@@ -23,7 +23,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  // mainWindow.setAlwaysOnTop(false, 'pop-up-menu');
+  mainWindow.setAlwaysOnTop(false, 'pop-up-menu');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
