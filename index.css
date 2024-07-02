@@ -6,17 +6,8 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   height: 100%;
-  background: url('../src/images/bg.jpg') no-repeat center center fixed;
+  background: url('../images/bg.jpg')no-repeat center center fixed;
   background-size: contain;
-}
-
-.bold-text {
-  font-weight: bold;
-}
-.description {
-  font-size: 16px;
-  margin-top: 10px;
-  color: #555;
 }
 
 .btn {
@@ -34,67 +25,7 @@ body {
   border-radius: 10px;
 }
 
-.exitbtn {
-  top: 0%;
-  left: 0%;
-  width: 20%;
-  height: 20%;
-}
-
-/* Adjusted top position for the first button */
-.clickable1 {
-  top: 35%;
-  left: 11%;
-}
-
-/* Reduced space between buttons */
-.clickable2 {
-  top: 42%;
-  left: 11%;
-}
-
-.clickable3 {
-  top: 49%;
-  left: 11%;
-}
-
-.clickable4 {
-  top: 56%;
-  left: 11%;
-}
-
-.clickable5 {
-  top: 63%;
-  left: 11%;
-}
-
-.clickable6 {
-  top: 35%;
-  left: 48.5%;
-}
-
-.clickable7 {
-  top: 42%;
-  left: 48.5%;
-}
-
-.clickable8 {
-  top: 49%;
-  left: 48.5%;
-}
-
-.clickable9 {
-  top: 56%;
-  left: 48.5%;
-}
-
-.clickable10 {
-  top: 63%;
-  left: 48.5%;
-}
-
-.player-btn {
-  right: 50%;
+.btnsml {
   outline: none;
   color: white;
   background-color: #b6b6b6;
@@ -102,393 +33,75 @@ body {
   font-size: 16px;
   font-weight: 300;
   border-color: transparent;
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  margin: 0 10px;
-}
-/* Music player container */
-.music-player-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  position: fixed;
-  bottom: 15%;
-  width: 100%;
-  padding: 0 20%;
-  box-sizing: border-box;
-  transform: translateX(-4%);
-}
-
-/* Music player */
-.music-player {
-  display: flex;
-  align-items: center;
-  width: 100%; /* Make it full width */
-  max-width: 65%; /* Prevent it from getting too wide */
-  padding: 1%; /* Adjust padding */
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Seekbar styles */
-#seekBar {
-  width: 100%; /* Use 100% width to be responsive */
-  height: 20px; /* Adjust height as needed */
-  margin: 0 1%; /* Adjusted margin for seek bar */
-  flex-grow: 1; /* Allow seekbar to grow and fill available space */
-}
-
-#timerDisplay {
-  margin-right: 2%; /* Space between timer and seekbar */
-  color: #fff; /* Timer text color */
-}
-
-/* Media query for responsiveness */
-@media (max-width: 600px) {
-  .music-player {
-    padding: 1%;
-  }
-}
-
-
-
-/* Video player popup */
-.video-player-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: background-color 10.0s ease;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  -webkit-transition: background-color 10.0s ease;
-  -moz-transition: background-color 10.0s ease;
-  -ms-transition: background-color 10.0s ease;
-  -o-transition: background-color 10.0s ease;
-}
-
-.video-player-popup .popup-content {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  max-width: 800px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.video-player-popup header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #444;
-  color: #fff;
-}
-
-.video-player-popup .player-body {
-  padding: 10px;
-}
-
-.video-player-popup .player-body video {
-  width: 100%;
+  z-index: 10;
+  width: 20%;
+  height: 8.5%;
   border-radius: 10px;
 }
 
-/* Updated button styling for the video player button */
-#videoPlayerButton {
-  position: fixed;
-  top: 20px;
-  right: 20px; /* Adjust the distance from the right edge */
-  background-color: #b6b6b6;
-  border: none;
-  color: white;
-  width: 100px; /* Adjust the size as needed */
-  height: 100px; /* Adjust the size as needed */
-  border-radius: 50%; /* Make it a perfect circle */
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1000; /* Ensure the button appears above other elements */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.exitbtn {
+  top: 0%;
+  left: 0%;
+  width: 20%;
+  height: 20%;
 }
 
-#videoPlayerButton:hover {
-  background-color: #ad9bb5;
+.clickable1 {
+  top: 49.5%;
+  left: 11%;
 }
 
-#videoPlayerButton::before {
-  content: "📽️"; /* Display the emoji */
-  font-size: 50px; /* Adjust the font size to make it slightly bigger */
-  margin-right: 5px; /* Add some space between the emoji and the button edge */
+.clickable2 {
+  top: 56%;
+  left: 11%;
 }
 
-/* Add this CSS to your existing stylesheet or create a new CSS file */
-#popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 9999; /* Ensure the popup is on top of other elements */
+.clickable3 {
+  top: 62.5%;
+  left: 11%;
 }
 
-#popup-message {
-  margin: 0;
+.clickable4 {
+  top: 69%;
+  left: 11%;
 }
 
-.battery-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+.clickable5 {
+  top: 75.5%;
+  left: 11%;
 }
 
-/* Battery styles */
-.battery {
-  padding: 1% 1%; /* Slightly increase padding */
-  width: 20%; /* Slightly increase width */
-  border: solid 14px #000; /* Slightly increase border thickness */
+.clickable6 {
+  top: 49.5%;
+  left: 48.5%;
 }
 
-.battery:after {
-  content: " ";
-  width: 10px; /* Slightly increase width */
-  background: #FFF;
+.clickable7 {
+  top: 56%;
+  left: 48.5%;
 }
 
-.bar {
-  cursor: pointer;
-  display: inline-block;
-  width: 0;
-  border: solid 7px #000; /* Slightly increase border thickness */
-  padding: 2%; /* Slightly increase padding */
-  height: 30px; /* Slightly increase height */
-  background: transparent;
-  transition: background 1s;
+.clickable8 {
+  top: 62.5%;
+  left: 48.5%;
 }
 
-.bar.active {
-  background: limegreen;
+.clickable9 {
+  top: 69%;
+  left: 48.5%;
 }
 
-
-
-#blankSquarePopup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; /* Adjust the width to cover the entire viewport */
-  height: 100vh; /* Adjust the height to cover the entire viewport */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 9999;
-}
-.popupContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 80%; /* Adjust the width of the content */
-  height: 80%; /* Adjust the height of the content */
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  font-size: 20px;
-
+.clickable10 {
+  top: 75.5%;
+  left: 48.5%;
 }
 
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
+.clickable11 {
+  top: 38%;
+  left: 19%;
 }
-
-.toggleBlankSquarePopup {
-  position: fixed;
-  top: 50%; /* Vertically center */
-  left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%); /* Center the element */
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  z-index: 9999;
-}
-
-.toggleBlankSquarePopup {
-  text-align: center;
-}
-
-.toggleBlankSquarePopup button {
-  margin-top: 10px;
-}
-
-
-.popupContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 80%; /* Adjust the width of the content */
-  height: auto; /* Let the height adjust based on content */
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center horizontally */
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.welcomeMessage {
-  margin-bottom: 20px; /* Add space between welcome message and questions */
-}
-
-.questionsContainer {
-  text-align: left; /* Align questions to the left */
-}
-
-.submitButton {
-  background-color: #ff0000; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition-duration: 0.4s;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-
-/* Hover effect for the submit button */
-.submitButton:hover {
-  background-color: #45a049; /* Darker Green */
-  color: white;
-}
-
-#project_container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px; /* Adjust padding as needed */
-}
-
-#logo {
-  margin-bottom: 20px; /* Add some space below the logo */
-}
-
-#logo img {
-  width: 150px; /* Adjust the size as needed */
-  height: auto; /* Maintain the aspect ratio */
-}
-
-
-
-#timerDisplay {
-  margin-left: 10px;
-  color: white;
-  font-size: 14px;
-}
-
-
-
-#blankSquarePopup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.popupContent {
-  position: relative;
-  width: 21cm; /* A4 paper width */
-  height: 29.7cm; /* A4 paper height */
-  max-width: 80%; /* Maximum width to keep it responsive */
-  max-height: 80vh; /* Maximum height to keep it responsive */
-  overflow-y: auto;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  outline: 8px solid black;
-  background-color: #fff; /* Ensures content background is still visible */
-  font-weight: bold; /* Makes the text bolder */
-}
-
-.popupContent::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../src/images/RechargeYourself.jpg'); /* Background image */
-  background-size: cover; /* Adjust background size */
-  background-position: center; /* Center the background image */
-  opacity: 0.05; /* Opacity of the background image */
-  z-index: -1; /* Ensure the pseudo-element is behind the content */
-  border-radius: 5px; /* Match the border-radius of the main container */
-}
-
-.welcomeMessage {
-  margin-top: -20px; /* Move it 20px higher */
-  margin-bottom: 20px;
-  font-size: 19px;
-  color: #333; /* Modify color as needed */
-  text-align: center; /* Center text within its own container */
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
+.clickable12 {
+  top: 38%;
+  left: 56.5%;
 }

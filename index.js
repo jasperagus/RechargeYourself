@@ -3,7 +3,7 @@ const path = require('path');
 
 
 
-  
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -12,8 +12,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1500,
-    height: 800,
+    width: 900,
+    height: 600,
     frame: false,
     fullscreen: true,
     webPreferences: {
@@ -23,7 +23,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.setAlwaysOnTop(false, 'pop-up-menu');
+  // mainWindow.setAlwaysOnTop(true, 'pop-up-menu');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -50,4 +50,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
