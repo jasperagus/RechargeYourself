@@ -541,6 +541,5 @@ body {
 
 .instructions .new-here,
 .instructions .been-before {
-  border: 5px solid #000000; /* Border style */
   padding: 10px; /* Padding inside the border */
 }

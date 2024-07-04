@@ -114,7 +114,7 @@ setInterval(() => {
 
     // Check if the song has ended
     if (newPosition === 0 && !isPopupShown) {
-        toggleBlankSquarePopup("Song ended! How was your experience?", true, false); 
+        toggleBlankSquarePopup("", true, false); 
         isPopupShown = true;
 
         // Reset button state and color for the currently playing song
