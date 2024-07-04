@@ -43,6 +43,7 @@
       </div>
     </div>
     
+<<<<<<< Updated upstream
     <button id="btn1" class="clickable1 btn" data-is-playing="false">1. Korte Relaxsessie - 12:15 min</button>
     <button id="btn2" class="clickable2 btn" data-is-playing="false">2. Diepe ontspanning - 26:14 min</button>
     <button id="btn3" class="clickable3 btn" data-is-playing="false">3. Meer rust in je hoofd - 20:49 min</button>
@@ -56,23 +57,44 @@
     
     <button id="videoPlayerButton" class="clickable11 btn"></button>    
 
+=======
+    <div class="btn-container">
+      <button id="btn1" class="clickable1 btn" onclick="storeButtonClick(this.id)">1. Korte Relaxsessie - 12:15 min</button>
+      <button id="btn2" class="clickable2 btn" onclick="storeButtonClick(this.id)">2. Diepe ontspanning - 26:14 min</button>
+      <button id="btn3" class="clickable3 btn" onclick="storeButtonClick(this.id)">3. Meer rust in je hoofd - 20:49 min</button>
+      <button id="btn4" class="clickable4 btn" onclick="storeButtonClick(this.id)">4. Beter slapen - 20:10 min</button>
+      <button id="btn5" class="clickable5 btn" onclick="storeButtonClick(this.id)">5. Sublimale muzieksessie - 15:00 min</button>
+      <button id="btn6" class="clickable6 btn" onclick="storeButtonClick(this.id)">6. Recharge sessie - 15:00 min</button>
+      <button id="btn7" class="clickable7 btn" onclick="storeButtonClick(this.id)">7. Jezelf opladen - 16:31 min</button>
+      <button id="btn8" class="clickable8 btn" onclick="storeButtonClick(this.id)">8. Loslaten negatieve emoties - 18.42 min</button>
+      <button id="btn9" class="clickable9 btn" onclick="storeButtonClick(this.id)">9. Emotionele balans - 17.02 min</button>
+      <button id="btn10" class="clickable10 btn" onclick="storeButtonClick(this.id)">10. Beter eetpatroon - 18:58 min</button>
+      <button id="videoPlayerButton" class="clickable11 btn"></button>    
+    </div>
+    
+>>>>>>> Stashed changes
     <div id="blankSquarePopup" style="display: none;">
       <div class="popupContent">
         <div class="popupBackground"></div> <!-- Background image -->
-        <button class="closeButton" onclick="toggleBlankSquarePopup()">X</button>
+        <button class="closeButton" onclick="toggleBlankSquarePopup('', false, false, false)">X</button>
         <div class="welcomeMessage" id="welcomeMessage">
-          <h1 class="main-title">Recharge Cocoon!</h1>
-          <h1>Welcome to the</h1>
+          <div class="startmessage">
+          <h1>Welcome</h1>
+          <h3>to the</h3>
+        </div>
+        <div class="popupbottom ">
+        <h1>Recharge Cocoon!</h1>
           <div class="instructions">
             <div class="new-here">
               <h5>New here?</h5>
-              <h6>Press the "X" to close this popup and then press the instruction video top right.</h6>
+              <h6>Press here for the instruction video.</h6>
             </div>
             <div class="been-before">
               <h5>Been before?</h5>
-              <h6>Press the "X" to close the popup and then choose your session.</h6>
+              <h6>Put the sensor on your finger and then press here.</h6>
             </div>          
           </div>
+        </div>
           <p></p>
         </div>    
         <div class="questionsContainer">
@@ -89,7 +111,7 @@
             <label for="feeling4">4. Energiek</label><br>
             <input type="checkbox" id="feeling5" name="feeling" value="Neutraal">
             <label for="feeling5">5. Neutraal</label><br>
-
+    
             <h4>Afhankelijk van de keuze uit vraag 1 is het nu erger/slechter/minder of beter?</h4>
             <input type="checkbox" id="impact1" name="impact" value="Erger">
             <label for="impact1">1. Erger</label><br>
@@ -101,13 +123,13 @@
             <label for="impact4">4. Beter</label><br>
             <input type="checkbox" id="impact5" name="impact" value="Veel beter">
             <label for="impact5">5. Veel beter</label><br>
-
+    
             <h4>Neem je een pauze van je werk?</h4>
             <input type="checkbox" id="pauseYes" name="pause" value="Ja">
             <label for="pauseYes">1. Ja</label><br>
             <input type="checkbox" id="pauseNo" name="pause" value="Nee">
             <label for="pauseNo">2. Nee</label><br>
-
+    
             <h4>Heb je vandaag gezond gegeten?</h4>
             <input type="checkbox" id="healthyYes" name="healthy" value="Ja">
             <label for="healthyYes">1. Ja</label><br>
@@ -118,7 +140,7 @@
         <button class="submitButton" onclick="submitForm()">Submit</button>
       </div>
     </div>
-  </div>
+    
 
   <div id="videoPlayerPopup" class="video-player-popup">
     <header>

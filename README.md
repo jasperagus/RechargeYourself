@@ -55,3 +55,5 @@ Tickets sprint 3:
  * Layout van pop-ups ziet er goed uit (not Done)
 
 
+
+knop voor dat de app terug gaat naar de start position
