@@ -179,7 +179,7 @@ const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
     values.push(songIndex); 
 
     // Add location to values array (location is hardcoded, change if needed)
-    values.push("Breda1"); 
+    values.push("Nassausingel 26 Breda"); 
 
   // Add date and time to the values array
 const time = new Date();
@@ -193,7 +193,7 @@ values.push(formattedDate, formattedTime);
 const csvRow = values.join(',');
 
   // Determine the file path for saving
-const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+const filePath = 'C:\\Users\\jkors\\Dropbox\\RechargeCocoon_data\\RechargeCocoon\\survey_results.csv';
 
   // Append the CSV row to the file
 fs.appendFile(filePath, csvRow + '\n', (err) => {
