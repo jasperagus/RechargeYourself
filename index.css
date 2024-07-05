@@ -527,8 +527,6 @@ body {
   margin-right: 160px;
 }
 
-
-
 .instructions .new-here:hover,
 .instructions .been-before:hover {
   transform: translateY(-4px); /* Lift button slightly higher on hover */
@@ -542,3 +540,29 @@ body {
   margin-bottom: 10%;
   font-size: 250%;
 }
+
+.resetButton {
+  background-color: #ff0000; /* Red */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Hover effect for the submit button */
+.resetButton:hover {
+  background-color: #45a049; /* Darker Green */
+  color: white;
+}
+

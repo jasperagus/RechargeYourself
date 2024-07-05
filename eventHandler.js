@@ -218,3 +218,9 @@ function toggleBlankSquarePopup(text, showQuestions, showWelcome, showCloseButto
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none";
 }
+
+function resetapp() {
+    alert("App has been reset!");
+    // Add your reset logic here
+  }
+  
