@@ -213,8 +213,7 @@ function toggleBlankSquarePopup(text, showQuestions, showWelcome, showCloseButto
     popupText.textContent = text;
     
     welcomeMessage.style.display = showWelcome ? "block" : "none";
-    closeButton.style.display = showCloseButton ? "block" : "none";
-    
+    closeButton.style.display = showCloseButton ? "block" : "none";    
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none";

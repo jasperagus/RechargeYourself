@@ -365,6 +365,7 @@ body {
 
 .questionsContainer {
   text-align: left; /* Align questions to the left */
+  font-size: 20px;
 }
 
 .submitButton {
