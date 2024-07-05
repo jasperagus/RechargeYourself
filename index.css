@@ -21,18 +21,29 @@ body {
 
 .btn {
   outline: none;
-  color: white;
+  color: rgb(0, 0, 0);
   background-color: #b6b6b6;
-  text-align: left;
-  font-size: 16px;
+  text-align: left; /* Change text alignment to left */
+  padding-left: 30px; /* Add padding to move text to the left */
+  font-size: 26px;
   font-weight: 300;
-  border-color: transparent;
   position: absolute;
   z-index: 10;
   width: 35.9%;
   height: 5.5%;
   border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for floating effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; /* Added border-color to transition */
 }
+
+.btn:hover {
+  transform: translateY(-4px); /* Lift button slightly higher on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow intensity on hover */
+  background-color: #a0a0a0; /* Darken background color on hover */
+  border-color: #000; /* Darken border color on hover */
+}
+
+
 
 .exitbtn {
   top: 0%;
@@ -125,7 +136,7 @@ body {
   display: flex;
   align-items: center;
   width: 100%; /* Make it full width */
-  max-width: 65%; /* Prevent it from getting too wide */
+  max-width: 45%; /* Prevent it from getting too wide */
   padding: 1%; /* Adjust padding */
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -228,7 +239,7 @@ body {
 #videoPlayerButton::before {
   content: "📽️"; /* Display the emoji */
   font-size: 50px; /* Adjust the font size to make it slightly bigger */
-  margin-right: 5px; /* Add some space between the emoji and the button edge */
+  margin-right: 25px; /* Add some space between the emoji and the button edge */
 }
 
 /* Add this CSS to your existing stylesheet or create a new CSS file */
@@ -265,6 +276,8 @@ body {
   padding: 1% 1%; /* Slightly increase padding */
   width: 16%; /* Slightly increase width */
   border: solid 14px #000; /* Slightly increase border thickness */
+  position: relative; /* Ensure relative positioning for shadow */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); /* Stronger shadow effect */
 }
 
 .battery:after {
@@ -282,11 +295,14 @@ body {
   height: 30px; /* Slightly increase height */
   background: transparent;
   transition: background 1s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.8); /* Stronger shadow effect */
+
 }
 
 .bar.active {
   background: limegreen;
 }
+
 
 
 
@@ -299,23 +315,6 @@ body {
   height: 100vh; /* Adjust the height to cover the entire viewport */
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   z-index: 9999;
-}
-.popupContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 80%; /* Adjust the width of the content */
-  height: 80%; /* Adjust the height of the content */
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  font-size: 20px;
-
 }
 
 .closeButton {
@@ -350,24 +349,6 @@ body {
 }
 
 
-.popupContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  width: 80%; /* Adjust the width of the content */
-  height: auto; /* Let the height adjust based on content */
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center horizontally */
-  font-size: 18px;
-
-}
-
 .closeButton {
   position: absolute;
   top: 10px;
@@ -384,6 +365,7 @@ body {
 
 .questionsContainer {
   text-align: left; /* Align questions to the left */
+  font-size: 20px;
 }
 
 .submitButton {
@@ -447,36 +429,44 @@ body {
 
 .popupContent {
   position: relative;
-  width: 21cm; /* A4 paper width */
-  height: 29.7cm; /* A4 paper height */
-  max-width: 80%; /* Maximum width to keep it responsive */
-  max-height: 80vh; /* Maximum height to keep it responsive */
-  overflow-y: auto;
+  width: 21cm;
+  height: 29.7cm;
+  max-width: 80%;
+  max-height: 80vh;
+  overflow: hidden; /* Hide scrollbars */
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 0 8px black; /* Simulated rounded outline */
   display: flex;
   flex-direction: column;
   align-items: center;
-  outline: 8px solid black;
-  background-color: #fff; /* Ensures content background is still visible */
-  font-weight: bold; /* Makes the text bolder */
+  background-color: #fff;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 
 .popupContent::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../src/images/RechargeYourself.jpg'); /* Background image */
-  background-size: cover; /* Adjust background size */
-  background-position: center; /* Center the background image */
-  opacity: 0.05; /* Opacity of the background image */
-  z-index: -1; /* Ensure the pseudo-element is behind the content */
-  border-radius: 5px; /* Match the border-radius of the main container */
+  top: -8px; /* Adjust to overlap the outline */
+  left: -8px; /* Adjust to overlap the outline */
+  width: calc(100% + 16px); /* Adjust to overlap the outline */
+  height: calc(100% + 16px); /* Adjust to overlap the outline */
+  background-image: url('../src/images/RechargeYourself.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  z-index: -1;
+  border-radius: 20px;
 }
+
+.popupContent:hover::before {
+  opacity: 0.1; /* Adjust the opacity of the background image on hover */
+}
+
 
 .welcomeMessage {
   font-size: 30px;
@@ -485,6 +475,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  line-height: 75%;
 }
 
 .closeButton {
@@ -497,38 +488,15 @@ body {
   cursor: pointer;
 }
 
-/* Adjust the main title position */
-.main-title {
-  font-size: 3em; /* Keep as needed */
-  position: relative;
-  top: 140px; /* Adjust as needed to move it above the center */
-  text-align: center; /* Center align the text */
-}
-
-/* Adjust the position of the second title */
-#welcomeMessage h1:last-of-type {
-  font-size: 1.5em; /* Keep as needed */
-  position: relative;
-  top: -180px; /* Adjust as needed to move it a little lower */
-  text-align: center; /* Center align the text */
-}
-
-/* Remove the general margin adjustment for all h1 */
-#welcomeMessage h1 {
-  margin-top: 0; /* Reset margin top */
-}
-
 .instructions {
+  color: rgb(0, 0, 0);
+  text-align: left;
+  width: 70%; /* Adjust the width to your preference */
+  margin: 0 auto; /* Center align horizontally */
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 150px; /* Adjust as needed to move the instructions up */
-}
-
-.instructions div {
-  flex: 1;
-  text-align: center;
-  margin: 0 35px; /* Adjust spacing between columns as needed */
+  flex-direction: row; /* Stack items vertically */
+  justify-content: center; /* Center align vertically */
+  align-items: center; /* Center align horizontally */
 }
 
 .instructions div h5 {
@@ -536,10 +504,64 @@ body {
 }
 
 .instructions div h6 {
-  margin: 30px 0; /* Adjust spacing between steps as needed */
+  margin: 30px; /* Adjust spacing between steps as needed */
 }
 
 .instructions .new-here,
 .instructions .been-before {
-  padding: 10px; /* Padding inside the border */
+  width: 350px; /* Set a fixed width */
+  height: 210px; /* Set a fixed height */
+  background-color: #b6b6b6; /* Background color */
+  color: rgb(0, 0, 0); /* Text color */
+  text-align: center; /* Text alignment */
+  font-size: 25px; /* Font size */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  cursor: pointer; /* Pointer cursor */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; /* Transition effects */
+  border: 2px solid #000; /* Black border */
+  margin: 10px; /* Adjust margin between buttons */
+
+}
+.instructions .new-here{
+  margin-right: 160px;
+}
+
+.instructions .new-here:hover,
+.instructions .been-before:hover {
+  transform: translateY(-4px); /* Lift button slightly higher on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow intensity on hover */
+  background-color: #a0a0a0; /* Darken background color on hover */
+  border-color: #000; /* Darken border color on hover */
+}
+
+.popupbottom h1{
+  margin-top: 250px; /* Adjust margin between buttons */
+  margin-bottom: 10%;
+  font-size: 250%;
+}
+
+.resetButton {
+  background-color: #ff0000; /* Red */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Hover effect for the submit button */
+.resetButton:hover {
+  background-color: #45a049; /* Darker Green */
+  color: white;
 }

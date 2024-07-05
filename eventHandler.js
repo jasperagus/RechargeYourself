@@ -5,7 +5,7 @@ var oscServer = new sendOSC();
 
 // Welcome popup
 window.onload = function() {
-    toggleBlankSquarePopup(" " , false, true); // Don't show questions on welcome popup
+    toggleBlankSquarePopup(" ", false, true, true); // Show close button for welcome popup
 };
 // Function to handle the play/pause button click
 function handleButtonClick(songIndex) {
@@ -114,7 +114,7 @@ setInterval(() => {
 
     // Check if the song has ended
     if (newPosition === 0 && !isPopupShown) {
-        toggleBlankSquarePopup("", true, false); 
+        toggleBlankSquarePopup("", true, false, false); // Hide close button for question popup
         isPopupShown = true;
 
         // Reset button state and color for the currently playing song
@@ -157,78 +157,69 @@ document.getElementById("videoPlayerButton").addEventListener('click', toggleVid
 // Add event listener to the top left button to toggle the blank square popup
 document.getElementById("topLeftButton").addEventListener('click', toggleBlankSquarePopup);
 
+// Function to submit the form
 function submitForm() {
-// Require Electron's remote module
-const { remote } = require('electron');
-const fs = remote.require('fs');
-const path = require('path');
-const form = document.getElementById('rechargeForm');
-const formData = new FormData(form);
+    const { remote } = require('electron');
+    const fs = remote.require('fs');
+    const path = require('path');
+    const form = document.getElementById('rechargeForm');
+    const formData = new FormData(form);
 
-  // Prepare the values array for CSV content
-const values = [];
+    const values = [];
 
-  // Extract form field values into the values array
     formData.forEach((value) => {
-    values.push(value);
-});
+        values.push(value);
+    });
 
-  // gather which song was playing
-const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
-  // Add song number to values array
+    const songIndex = document.getElementById('btnPlayPause').dataset.songIndex;
     values.push(songIndex); 
 
-    // Add location to values array (location is hardcoded, change if needed)
     values.push("Breda1"); 
 
-  // Add date and time to the values array
-const time = new Date();
-const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
-const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+    const time = new Date();
+    const formattedDate = `${time.getDate().toString().padStart(2, '0')}-${(time.getMonth() + 1).toString().padStart(2, '0')}-${time.getFullYear()}`;
+    const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
 
-  // Add formatted date and time to values array
-values.push(formattedDate, formattedTime); 
+    values.push(formattedDate, formattedTime); 
 
-  // Join values array into a CSV row
-const csvRow = values.join(',');
+    const csvRow = values.join(',');
 
-  // Determine the file path for saving
-const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
+    const filePath = 'C:\\Users\\Qub3zGamingL3\\Dropbox\\RechargeCocoon_test_jasper\\survey_results.csv';
 
-  // Append the CSV row to the file
-fs.appendFile(filePath, csvRow + '\n', (err) => {
-    if (err) {
-    console.error('Error appending to file:', err);
-    return;
-    }
-    console.log('Data successfully appended to file:', filePath);
-});
+    fs.appendFile(filePath, csvRow + '\n', (err) => {
+        if (err) {
+            console.error('Error appending to file:', err);
+            return;
+        }
+        console.log('Data successfully appended to file:', filePath);
+    });
 
-  // Reset the form
-form.reset();
+    form.reset();
 
-  // Close the popup
-toggleBlankSquarePopup();
+    toggleBlankSquarePopup("", false, false, false);
 
-  // Reload the page
-location.reload();
+    location.reload();
 }
 
-// Function to toggle the blank square popup
-function toggleBlankSquarePopup(text, showQuestions, showWelcome) {
+function toggleBlankSquarePopup(text, showQuestions, showWelcome, showCloseButton) {
     const blankSquarePopup = document.getElementById("blankSquarePopup");
     const popupContent = blankSquarePopup.querySelector(".popupContent");
     const popupText = popupContent.querySelector("p");
-    const welcomeMessage = popupContent.querySelector("#welcomeMessage"); // Select welcome message
+    const welcomeMessage = popupContent.querySelector("#welcomeMessage");
     const submitButton = popupContent.querySelector(".submitButton");
     const questionsContainer = popupContent.querySelector(".questionsContainer");
+    const closeButton = popupContent.querySelector(".closeButton");
     
-    popupText.textContent = text; // Set the text content dynamically
+    popupText.textContent = text;
     
-    // Show or hide welcome message based on showWelcome parameter
     welcomeMessage.style.display = showWelcome ? "block" : "none";
-    
+    closeButton.style.display = showCloseButton ? "block" : "none";    
     blankSquarePopup.style.display = blankSquarePopup.style.display === "block" ? "none" : "block";
     questionsContainer.style.display = showQuestions ? "block" : "none";
     submitButton.style.display = showQuestions ? "block" : "none";
 }
+
+function resetapp() {
+    alert("App has been reset!");
+    // Add your reset logic here
+  }
